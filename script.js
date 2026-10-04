@@ -76,14 +76,29 @@ if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').
   }, 2000);
 }
 
-// home page: featured products carousel (arrows + gentle auto-scroll that pauses when touched or hovered)
+// home page: featured products carousel - loops forward forever (1 2 3 4 5 1 2 3 ...)
 const car = document.querySelector('.carousel');
 if (car) {
-  const step = () => { const c = car.querySelector('.product'); return c ? c.getBoundingClientRect().width + 22 : 300; };
+  const track = car.querySelector('.track');
+  const originals = [...track.children];
+  // a hidden second copy of the cards lets the row keep moving forward without rewinding
+  originals.forEach(c => {
+    const copy = c.cloneNode(true);
+    copy.setAttribute('aria-hidden', 'true');
+    copy.querySelectorAll('a').forEach(l => l.tabIndex = -1);
+    track.appendChild(copy);
+  });
+  const setWidth = () => track.children[originals.length].offsetLeft - track.children[0].offsetLeft;
+  const step = () => originals[0].getBoundingClientRect().width + 22;
+  const jump = x => car.scrollTo({ left: x, behavior: 'instant' });
   const go = dir => {
-    const atEnd = car.scrollLeft + car.clientWidth >= car.scrollWidth - 5;
-    if (dir > 0 && atEnd) car.scrollTo({ left: 0 }); else car.scrollBy({ left: dir * step() });
+    const w = setWidth();
+    if (dir > 0 && car.scrollLeft >= w - 2) jump(car.scrollLeft - w);   // silently back to the same card in the first copy
+    if (dir < 0 && car.scrollLeft <= 2) jump(car.scrollLeft + w);
+    car.scrollBy({ left: dir * step(), behavior: 'smooth' });
   };
+  // keep manual swiping endless too
+  let t; car.addEventListener('scroll', () => { clearTimeout(t); t = setTimeout(() => { const w = setWidth(); if (car.scrollLeft >= w) jump(car.scrollLeft - w); }, 150); }, { passive: true });
   document.querySelector('.carousel-nav .next')?.addEventListener('click', () => go(1));
   document.querySelector('.carousel-nav .prev')?.addEventListener('click', () => go(-1));
   let paused = false;
