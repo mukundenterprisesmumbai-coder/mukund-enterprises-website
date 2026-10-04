@@ -136,7 +136,10 @@ input, select, textarea { width: 100%; background: #fff; border: 0; border-botto
 input:focus, select:focus, textarea:focus { outline: 0; border-color: var(--accent); }
 textarea { min-height: 120px; resize: vertical; border: 1px solid #bbb; padding: 12px; }
 .note { font-size: .78rem; color: var(--grey); }
-.ok { display: none; color: var(--accent); font-size: .9rem; }
+.ok, .err { display: none; font-size: .9rem; }
+.ok { color: var(--accent); }
+.err { color: #b42318; }
+.ok a, .err a { text-decoration: underline; font-weight: 600; }
 
 .band { text-align: center; }
 .band .btns { justify-content: center; }
