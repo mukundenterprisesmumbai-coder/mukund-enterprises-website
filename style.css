@@ -112,7 +112,7 @@ section.dark { border: 0; }
 .filters button.on, .filters button:hover { background: #000; color: #fff; }
 .product { border: 1px solid var(--line); background: #fff; display: flex; flex-direction: column; transition: .25s; }
 .product:hover { border-color: #000; box-shadow: 0 14px 34px rgba(0,0,0,.08); transform: translateY(-3px); }
-.product .img { aspect-ratio: 4 / 3; display: grid; place-items: center; background: #f3f3f3; border-bottom: 1px solid var(--line); }
+.product .img { aspect-ratio: 1 / 1; display: grid; place-items: center; background: #f3f3f3; border-bottom: 1px solid var(--line); }
 .product .img img { width: 44%; filter: brightness(.25) saturate(0); opacity: .75; }
 .product .body { padding: 22px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .product .cat { font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
@@ -174,11 +174,10 @@ footer .logo { display: inline-block; margin-bottom: 16px; }
 .product .img img.ph { width: 100%; height: 100%; object-fit: cover; filter: none; opacity: 1; }
 .product .img img.icon { width: 44%; height: auto; object-fit: contain; filter: brightness(.25) saturate(0); opacity: .75; }
 
-/* Factory photo gallery (About page) */
-.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 34px; }
+/* Factory photo gallery (About page): photos are shown whole, never cropped, stretched or enlarged past their real size */
+.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 34px; align-items: start; }
 .gallery figure { margin: 0; }
-.gallery img { width: 100%; height: auto; display: block; object-fit: cover; aspect-ratio: 3 / 2; background: #eee; }
+.gallery img { width: 100%; height: auto; display: block; background: #eee; }
 .gallery figure.wide { grid-column: 1 / -1; }
-.gallery figure.wide img { aspect-ratio: 21 / 9; }
 .gallery figcaption { font-size: .78rem; letter-spacing: .08em; color: #666; margin-top: 8px; }
-@media (max-width: 700px) { .gallery { grid-template-columns: 1fr; } .gallery figure.wide img { aspect-ratio: 3 / 2; } }
+@media (max-width: 700px) { .gallery { grid-template-columns: 1fr; } }
