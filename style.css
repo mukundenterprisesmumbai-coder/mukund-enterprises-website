@@ -196,7 +196,7 @@ footer .logo { display: inline-block; margin-bottom: 16px; }
 .carousel-nav { display: flex; gap: 10px; margin-bottom: 54px; }
 .carousel-nav button { width: 46px; height: 46px; border-radius: 50%; border: 1px solid #000; background: #fff; font-size: 1.5rem; line-height: 1; cursor: pointer; }
 .carousel-nav button:hover { background: #000; color: #fff; }
-.carousel { overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+.carousel { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
 .carousel::-webkit-scrollbar { display: none; }
 .carousel .track { display: flex; gap: 22px; }
 .carousel .product { flex: 0 0 calc((100% - 66px) / 4); scroll-snap-align: start; }
