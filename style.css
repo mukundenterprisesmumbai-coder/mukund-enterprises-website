@@ -56,7 +56,7 @@ em { font-style: normal; color: var(--accent); }
 /* Home page hero: photo slideshow behind the heading, with a dark film so the text stays readable */
 .hero { position: relative; overflow: hidden; }
 .hero-slides { position: absolute; inset: 0; z-index: 0; }
-.hero-slides .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.6s ease; }
+.hero-slides .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease; }
 .hero-slides .slide.on { opacity: 1; }
 .hero-slides::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.84) 0%, rgba(0,0,0,.66) 55%, rgba(0,0,0,.5) 100%); }
 .hero > .wrap { position: relative; z-index: 1; }
