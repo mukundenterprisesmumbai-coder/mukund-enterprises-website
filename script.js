@@ -48,13 +48,23 @@ if (form) {
     form.reset();
   });
 }
-// home page hero: rotate the background photos every 6 seconds
+// home page hero: photos fade into each other (1 second fade, a new photo every 2 seconds)
 const slides = document.querySelectorAll('.hero-slides .slide');
+const ready = new Set([0]);
+// load the later photos after the page is ready, and only show a photo once it has fully loaded
+window.addEventListener('load', () => slides.forEach((s, i) => {
+  if (!s.dataset.bg) return;
+  const img = new Image();
+  img.onload = () => { s.style.backgroundImage = "url('" + s.dataset.bg + "')"; ready.add(i); };
+  img.src = s.dataset.bg;
+}));
 if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let cur = 0;
   setInterval(() => {
+    const next = (cur + 1) % slides.length;
+    if (!ready.has(next)) return;
     slides[cur].classList.remove('on');
-    cur = (cur + 1) % slides.length;
+    cur = next;
     slides[cur].classList.add('on');
-  }, 6000);
+  }, 2000);
 }

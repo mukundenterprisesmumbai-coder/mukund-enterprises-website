@@ -17,7 +17,7 @@ body { font-family: var(--sans); background: #fff; color: var(--ink); line-heigh
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
-.wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+.wrap { max-width: 1760px; margin: 0 auto; padding: 0 clamp(28px, 4vw, 64px); }
 
 /* Header */
 header { position: sticky; top: 0; z-index: 20; background: var(--black); color: #fff; }
@@ -56,12 +56,12 @@ em { font-style: normal; color: var(--accent); }
 /* Home page hero: photo slideshow behind the heading, with a dark film so the text stays readable */
 .hero { position: relative; overflow: hidden; }
 .hero-slides { position: absolute; inset: 0; z-index: 0; }
-.hero-slides .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.6s ease; }
+.hero-slides .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease; }
 .hero-slides .slide.on { opacity: 1; }
 .hero-slides::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.84) 0%, rgba(0,0,0,.66) 55%, rgba(0,0,0,.5) 100%); }
 .hero > .wrap { position: relative; z-index: 1; }
 .hero-slides ~ .wrap h1 em { text-shadow: 0 1px 6px rgba(0,0,0,.6); }
-.hero-slides ~ .wrap .eyebrow { color: #fff; font-size: 1rem; font-weight: 700; letter-spacing: .22em; text-shadow: 0 1px 8px rgba(0,0,0,.75); }
+.hero-slides ~ .wrap .eyebrow { display: inline-block; color: var(--accent); font-size: 1rem; font-weight: 700; letter-spacing: .22em; padding: 9px 14px; background: rgba(0,0,0,.62); border-left: 3px solid var(--accent); }
 .hero-slides ~ .wrap .lead { color: #e6e6e6; text-shadow: 0 1px 6px rgba(0,0,0,.6); }
 @media (prefers-reduced-motion: reduce) { .hero-slides .slide { transition: none; } }
 .btns { display: flex; gap: 18px; margin-top: 40px; flex-wrap: wrap; align-items: center; }
@@ -112,7 +112,7 @@ section.dark { border: 0; }
 .filters button.on, .filters button:hover { background: #000; color: #fff; }
 .product { border: 1px solid var(--line); background: #fff; display: flex; flex-direction: column; transition: .25s; }
 .product:hover { border-color: #000; box-shadow: 0 14px 34px rgba(0,0,0,.08); transform: translateY(-3px); }
-.product .img { aspect-ratio: 4 / 3; display: grid; place-items: center; background: #f3f3f3; border-bottom: 1px solid var(--line); }
+.product .img { aspect-ratio: 1 / 1; display: grid; place-items: center; background: #f3f3f3; border-bottom: 1px solid var(--line); }
 .product .img img { width: 44%; filter: brightness(.25) saturate(0); opacity: .75; }
 .product .body { padding: 22px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .product .cat { font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: var(--accent); font-weight: 500; }
@@ -173,3 +173,11 @@ footer .logo { display: inline-block; margin-bottom: 16px; }
 .product .price { font-size: .85rem; color: #666; }
 .product .img img.ph { width: 100%; height: 100%; object-fit: cover; filter: none; opacity: 1; }
 .product .img img.icon { width: 44%; height: auto; object-fit: contain; filter: brightness(.25) saturate(0); opacity: .75; }
+
+/* Factory photo gallery (About page): photos are shown whole, never cropped, stretched or enlarged past their real size */
+.gallery { max-width: 1240px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 34px; align-items: start; }
+.gallery figure { margin: 0; }
+.gallery img { width: 100%; height: auto; display: block; background: #eee; }
+.gallery figure.wide { grid-column: 1 / -1; }
+.gallery figcaption { font-size: .78rem; letter-spacing: .08em; color: #666; margin-top: 8px; }
+@media (max-width: 700px) { .gallery { grid-template-columns: 1fr; } }
