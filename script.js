@@ -48,3 +48,13 @@ if (form) {
     form.reset();
   });
 }
+// home page hero: rotate the background photos every 6 seconds
+const slides = document.querySelectorAll('.hero-slides .slide');
+if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let cur = 0;
+  setInterval(() => {
+    slides[cur].classList.remove('on');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('on');
+  }, 6000);
+}
