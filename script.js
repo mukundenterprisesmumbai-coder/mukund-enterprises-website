@@ -75,3 +75,19 @@ if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').
     slides[cur].classList.add('on');
   }, 2000);
 }
+
+// home page: featured products carousel (arrows + gentle auto-scroll that pauses when touched or hovered)
+const car = document.querySelector('.carousel');
+if (car) {
+  const step = () => { const c = car.querySelector('.product'); return c ? c.getBoundingClientRect().width + 22 : 300; };
+  const go = dir => {
+    const atEnd = car.scrollLeft + car.clientWidth >= car.scrollWidth - 5;
+    if (dir > 0 && atEnd) car.scrollTo({ left: 0 }); else car.scrollBy({ left: dir * step() });
+  };
+  document.querySelector('.carousel-nav .next')?.addEventListener('click', () => go(1));
+  document.querySelector('.carousel-nav .prev')?.addEventListener('click', () => go(-1));
+  let paused = false;
+  ['mouseenter', 'touchstart', 'focusin'].forEach(e => car.addEventListener(e, () => paused = true, { passive: true }));
+  car.addEventListener('mouseleave', () => paused = false);
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) setInterval(() => { if (!paused) go(1); }, 3500);
+}
