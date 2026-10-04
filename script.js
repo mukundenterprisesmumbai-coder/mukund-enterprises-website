@@ -47,6 +47,8 @@ if (form) {
       if (!r.ok) throw new Error(r.status);
       ok.style.display = 'block';
       form.reset();
+      // enquiry is saved; now take the visitor straight to WhatsApp with their details filled in
+      setTimeout(() => { location.href = form.querySelector('.wa-link').href; }, 2000);
     } catch (_) {
       err.style.display = 'block';
     }
