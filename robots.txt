@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shadowumbrellas.in/sitemap.xml
+Sitemap: https://mukund-enterprises.netlify.app/sitemap.xml
