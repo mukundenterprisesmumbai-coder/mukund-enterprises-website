@@ -1,7 +1,7 @@
 ﻿rain-folding-umbrella.jpg
 2-fold-auto-open-umbrella-21.jpg
 3-fold-black-silver-auto-umbrella.jpg
-3-fold-manual-umbrella.jpg
+3-fold-black-silver-manual-umbrella.jpg
 2-fold-piping-auto-umbrella-black-silver.jpg
 mini-umbrella.jpg
 capsule-umbrella.jpg
