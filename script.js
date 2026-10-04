@@ -25,27 +25,32 @@ fbtns.forEach(b => b.addEventListener('click', () => {
   });
 }));
 
-// contact form -> opens WhatsApp with the message pre-filled
+// contact form -> saved by Netlify Forms (emailed to the business); WhatsApp offered as an optional follow-up
 const form = document.getElementById('enquiry');
 if (form) {
   const p = new URLSearchParams(location.search);
   if (p.get('product')) form.message.value = 'Hi, I would like a quote for: ' + p.get('product');
   if (p.get('topic')) form.topic.value = p.get('topic');
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const f = new FormData(form);
-    // 1) send to Netlify Forms -> arrives in your email
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(f).toString(),
-      keepalive: true,
-    }).catch(() => {});
-    // 2) also open WhatsApp with the details filled in
+    const btn = form.querySelector('button[type="submit"]');
+    const ok = form.querySelector('.ok'), err = form.querySelector('.err');
+    ok.style.display = err.style.display = 'none';
+    btn.disabled = true; btn.firstChild.textContent = 'Sending…';
+    // WhatsApp stays available as an optional, faster channel (visitor chooses to use it)
     const text = `New enquiry\nName: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email')}\nTopic: ${f.get('topic')}\nQuantity: ${f.get('qty') || '-'}\n\n${f.get('message')}`;
-    window.open('https://wa.me/' + SITE.whatsapp + '?text=' + encodeURIComponent(text), '_blank');
-    document.querySelector('.ok').style.display = 'block';
-    form.reset();
+    form.querySelectorAll('.wa-link').forEach(a => a.href = 'https://wa.me/' + SITE.whatsapp + '?text=' + encodeURIComponent(text));
+    try {
+      // saved by Netlify Forms and emailed to the business
+      const r = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(f).toString() });
+      if (!r.ok) throw new Error(r.status);
+      ok.style.display = 'block';
+      form.reset();
+    } catch (_) {
+      err.style.display = 'block';
+    }
+    btn.disabled = false; btn.firstChild.textContent = 'Send message';
   });
 }
 // home page hero: photos fade into each other (1 second fade, a new photo every 2 seconds)
