@@ -182,3 +182,8 @@ footer .logo { display: inline-block; margin-bottom: 16px; }
 .gallery figure.wide { grid-column: 1 / -1; }
 .gallery figcaption { font-size: .78rem; letter-spacing: .08em; color: #666; margin-top: 8px; }
 @media (max-width: 700px) { .gallery { grid-template-columns: 1fr; } }
+
+/* Google Maps links on the Contact page */
+.card .maplinks { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 12px; }
+.card .maplinks a { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.card .maplinks a:hover { color: #000; }
