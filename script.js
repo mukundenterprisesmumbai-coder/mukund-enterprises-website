@@ -50,6 +50,8 @@ if (form) {
 }
 // home page hero: rotate the background photos every 6 seconds
 const slides = document.querySelectorAll('.hero-slides .slide');
+// load the later photos only after the page is ready, so the first screen appears quickly
+window.addEventListener('load', () => slides.forEach(s => { if (s.dataset.bg) s.style.backgroundImage = "url('" + s.dataset.bg + "')"; }));
 if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let cur = 0;
   setInterval(() => {
