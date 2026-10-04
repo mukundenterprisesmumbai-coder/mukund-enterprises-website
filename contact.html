@@ -1,0 +1,85 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | Mukund Enterprises</title>
+<meta name="description" content="Contact Mukund Enterprises (Kalbadevi, Mumbai and Dombivli) for umbrellas, canopies and bulk branded orders.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap nav">
+  <a href="index.html" class="logo">Mukund<br>Enterprises<small>UMBRELLAS &amp; CANOPIES</small></a>
+  <button class="burger" aria-label="Menu">Menu</button>
+  <nav><ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="contact.html?topic=Bulk%20or%20B2B%20order" class="cta">Get a Quote</a></li>
+  </ul></nav>
+</div></header>
+
+<section class="hero small">
+  <div class="wrap">
+    <p class="eyebrow">Contact us</p>
+    <h1>Talk to the people who <em>make</em> it</h1>
+    <p class="lead">A product question, a sample request or a bulk requirement? Reach us directly and you will hear back from Mukund Enterprises, not a reseller.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="grid g4">
+      <div class="card"><p class="label">Call / WhatsApp</p><a class="big" data-phone href="#"></a><p>Straight through to our team. Quickest way to get a quote or share your logo.</p></div>
+      <div class="card"><p class="label">Office 1 · Mumbai</p><span class="big">Kalbadevi, Mumbai</span><p>26/28 Nirnay Sagar, Press Room No. B/4-A, Ground Floor, Dr. M.B. Velkar Street, Kolbhat Lane, Kalbadevi, Mumbai, Maharashtra 400002</p></div><div class="card"><p class="label">Office 2 · Dombivli</p><span class="big">Dombivli West</span><p>Jaihind Colony, Dombivli West, Thane, Maharashtra</p></div>
+      <div class="card"><p class="label">Bulk &amp; B2B</p><span class="big">Institutional orders</span><p>Send a requirement and we will quote directly.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap two">
+    <div>
+      <p class="eyebrow">Enquiry</p>
+      <h2>Send us a <em>message</em></h2>
+      <p class="lead">Fill this in and we will get back to you. We will reply by phone, email or WhatsApp.</p>
+    </div>
+    <form id="enquiry" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="enquiry">
+      <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+      <div class="row">
+        <div><label for="name">Name*</label><input id="name" name="name" required></div>
+        <div><label for="phone">Phone number*</label><input id="phone" name="phone" type="tel" required></div>
+      </div>
+      <div class="row">
+        <div><label for="email">Email ID*</label><input id="email" name="email" type="email" required></div>
+        <div><label for="topic">Topic</label>
+          <select id="topic" name="topic">
+            <option>Product question</option>
+            <option>Bulk or B2B order</option>
+            <option>Custom branding</option>
+            <option>Something else</option>
+          </select></div>
+      </div>
+      <div><label for="qty">Approx. quantity</label><input id="qty" name="qty" placeholder="e.g. 500 pieces"></div>
+      <div><label for="message">Message*</label><textarea id="message" name="message" required></textarea></div>
+      <button class="btn" type="submit">Send message</button>
+      <p class="ok">Thank you! Your enquiry has been sent. We will contact you shortly. A WhatsApp chat has also opened so you can message us directly.</p>
+      <p class="note">We use these details only to reply to your message.</p>
+    </form>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="foot">
+    <div><div class="logo" style="display:inline-block;margin-bottom:16px">Mukund<br>Enterprises</div><p>Manufacturer &amp; wholesale trader of promotional umbrellas, canopies and gazebo tents. Kalbadevi, Mumbai and Dombivli, Thane.</p></div>
+    <div><h4>Explore</h4><ul><li><a href="products.html">Products</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a data-phone href="#"></a></li><li>Kalbadevi, Mumbai 400002</li><li>Jaihind Colony, Dombivli West</li></ul></div>
+  </div>
+  <p class="copy">© 2026 Mukund Enterprises. All rights reserved. GSTIN 27AGCPJ9001C1ZX</p>
+</div></footer>
+<a class="wa" data-wa="Hi, I have an enquiry." aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11 19.8L3 29l6.4-2A13 13 0 1 0 16 3zm7.5 18.4c-.3.9-1.8 1.7-2.5 1.8-.6.1-1.4.1-2.3-.1a21 21 0 0 1-2.1-.8c-3.7-1.6-6.1-5.3-6.3-5.5-.2-.3-1.5-2-1.5-3.8s1-2.7 1.3-3.1c.3-.4.7-.5.9-.5h.7c.2 0 .5-.1.8.6l1.100 2.700c.1.200.2.400 0 .7l-.4.600-.6.700c-.2.200-.4.400-.2.800.2.400 1 1.700 2.200 2.700 1.500 1.300 2.800 1.800 3.200 2 .4.200.6.200.9-.1l1.200-1.500c.3-.4.600-.3.900-.2l2.600 1.200c.4.200.7.300.8.500.1.200.1 1-.2 1.900z"/></svg></a>
+<script src="script.js"></script>
+</body>
+</html>
