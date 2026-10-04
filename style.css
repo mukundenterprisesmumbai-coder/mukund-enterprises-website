@@ -144,9 +144,10 @@ textarea { min-height: 120px; resize: vertical; border: 1px solid #bbb; padding:
 
 /* Footer */
 footer { background: var(--black); color: #aaa; padding: 64px 0 28px; font-size: .85rem; }
-.foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; margin-bottom: 44px; }
+.foot { display: grid; grid-template-columns: 1.1fr .7fr 1.6fr; gap: 40px; margin-bottom: 44px; }
 footer h4 { font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: #fff; margin-bottom: 16px; font-weight: 500; }
 footer li { margin-bottom: 9px; }
+footer li b { color: #ddd; font-weight: 600; }
 footer a:hover { color: #fff; }
 footer .logo { display: inline-block; margin-bottom: 16px; }
 .copy { border-top: 1px solid var(--dline); padding-top: 22px; font-size: .75rem; }
