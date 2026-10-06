@@ -7,7 +7,6 @@ capsule-umbrella.jpg
 ladies-satin-print-umbrella.jpg
 golf-umbrella.jpg
 promotional-umbrella.jpg
-shadow-promotional-umbrella.jpg
 shadow-2-fold-piping-black-silver-umbrella.jpg
 wooden-stick-umbrella.jpg
 promotional-advertising-table.jpg
