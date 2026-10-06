@@ -1,4 +1,3 @@
-rain-folding-umbrella.jpg
 2-fold-auto-open-umbrella-21.jpg
 3-fold-black-silver-auto-umbrella.jpg
 3-fold-black-silver-manual-umbrella.jpg
@@ -19,7 +18,6 @@ display-tent-printed-canopy.jpg
 gazebo-tent.jpg
 outdoor-canopies.jpg
 kids-umbrella.jpg
-big-family-umbrella.jpg
 long-straight-umbrella.jpg
 transparent-umbrella.jpg
 reverse-umbrella.jpg
