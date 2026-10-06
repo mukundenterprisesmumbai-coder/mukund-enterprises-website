@@ -8,6 +8,7 @@ ladies-satin-print-umbrella.jpg
 golf-umbrella.jpg
 promotional-umbrella.jpg
 27-inch-3-fold-piping-umbrella.jpg
+24-inch-2-fold-piping-umbrella.jpg
 wooden-stick-umbrella.jpg
 promotional-advertising-table.jpg
 large-beach-umbrella.jpg
