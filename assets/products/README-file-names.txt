@@ -4,6 +4,7 @@
 mini-umbrella.jpg
 capsule-umbrella.jpg
 ladies-shehenshaah-umbrella.jpg
+satin-print-2-fold-umbrella.jpg
 golf-umbrella.jpg
 promotional-umbrella.jpg
 27-inch-3-fold-piping-umbrella.jpg
