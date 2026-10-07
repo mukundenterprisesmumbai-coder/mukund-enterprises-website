@@ -3,7 +3,7 @@
 3-fold-black-silver-manual-umbrella.jpg
 mini-umbrella.jpg
 capsule-umbrella.jpg
-ladies-satin-print-umbrella.jpg
+ladies-shehenshaah-umbrella.jpg
 golf-umbrella.jpg
 promotional-umbrella.jpg
 27-inch-3-fold-piping-umbrella.jpg
