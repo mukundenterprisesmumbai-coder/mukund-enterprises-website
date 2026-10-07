@@ -175,6 +175,8 @@ footer .logo { display: inline-block; margin-bottom: 16px; }
   .hero { padding: 80px 0 64px; }
 }
 .product .price { font-size: .85rem; color: #666; }
+.product .price a, .spec td a { color: var(--accent); font-weight: 600; cursor: pointer; }
+.product .price a:hover, .spec td a:hover { text-decoration: underline; }
 .product .img img.ph { width: 100%; height: 100%; object-fit: contain; filter: none; opacity: 1; }
 .product .img img.icon { width: 44%; height: auto; object-fit: contain; filter: brightness(.25) saturate(0); opacity: .75; }
 
