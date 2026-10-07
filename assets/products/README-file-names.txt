@@ -28,7 +28,7 @@ logo-printed-umbrella.jpg
 corporate-gift-umbrella.jpg
 promotional-umbrella-with-stand.jpg
 vendor-umbrella.jpg
-patio-umbrella-with-stand.jpg
+garden-umbrella-with-stand.jpg
 side-pole-cantilever-umbrella.jpg
 pop-up-canopy-10x10.jpg
 canopy-tent-with-side-walls.jpg
