@@ -13,7 +13,6 @@ promotional-umbrella.jpg
 wooden-stick-umbrella.jpg
 promotional-advertising-table.jpg
 large-beach-umbrella.jpg
-multicolor-garden-umbrella.jpg
 promotional-canopy-tent.jpg
 display-tent-printed-canopy.jpg
 gazebo-tent.jpg
