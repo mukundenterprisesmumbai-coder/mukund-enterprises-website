@@ -110,7 +110,12 @@ if (car) {
 // Google review pop-up (bottom-left). Add real reviews to REVIEWS; the pop-up stays hidden while the list is empty.
 const REVIEWS = [
   // { name: 'Customer name', stars: 5, text: 'Review text' }   // optional place: 'Dombivli' links the card to the Dombivli listing
+  { name: 'Bikash Jha', stars: 5, text: 'Your umbrella is of very good quality and the rate is also better than others. And your communication with the customer is also satisfactory ! Very good' },
+  { name: 'Mohit Rochlani', stars: 5, text: 'They have a good variety of umbrellas, with great quality and excellent service. The staff is helpful and the overall experience was very good.' },
+  { name: 'Kunal Patil', stars: 5, text: 'Har Har Mahadev 🙏 Our First Exibation Stall at Shiv Mandir ,Sagaon...... Very Good Quality' },
   { name: 'sruthi sree', stars: 5, text: 'Nice quality,had good experience with mukund enterprises and I am very happy with this products.' },
+  { name: 'Gaurav Aggarwal', stars: 5, place: 'Dombivli', text: 'Great work and good services' },
+  { name: 'Manoj jha', stars: 5, text: 'Very good umbrella brand and faithful work' },
   { name: 'venkata giri', stars: 5, text: 'I love this products very much.I very appreciate this website for selling good things.' },
   { name: 'Saurabh Singh', stars: 4, text: 'Amazing product and services 👍.' },
   { name: 'Sreelatha M', stars: 5, text: 'Good quality 👌 👌 👌' },
@@ -133,7 +138,7 @@ const REVIEW_LINKS = {
   let i = 0, timer, stopped = false;
   const show = () => {
     const r = list[i % list.length]; i++;
-    const text = r.text.length > 150 ? r.text.slice(0, 147).trim() + '…' : r.text;
+    const text = r.text.length > 180 ? r.text.slice(0, 177).trim() + '…' : r.text;
     box.innerHTML = `<button class="rp-close" aria-label="Close reviews">×</button>
       <a class="rp-body" href="${REVIEW_LINKS[r.place] || REVIEW_LINKS.Kalbadevi}" target="_blank" rel="noopener">
         <div class="rp-top">${G}<span class="rp-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span></div>
