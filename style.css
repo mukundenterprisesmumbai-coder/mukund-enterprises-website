@@ -234,3 +234,15 @@ a.img { display: grid; }
 .product .details { font-size: .78rem; font-weight: 600; color: #000; text-decoration: underline; text-underline-offset: 3px; }
 .product .details:hover { color: var(--accent); }
 .product h3 a { text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+/* Google review pop-up */
+.review-pop { position: fixed; left: 22px; bottom: 22px; z-index: 29; width: 330px; max-width: calc(100vw - 110px); background: #fff; border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 12px 34px rgba(0,0,0,.22); transform: translateY(140%); opacity: 0; transition: transform .5s ease, opacity .5s ease; }
+.review-pop.show { transform: none; opacity: 1; }
+.review-pop .rp-body { display: block; padding: 14px 16px 12px; color: #111; }
+.review-pop .rp-top { display: flex; align-items: center; gap: 8px; }
+.review-pop .rp-stars { color: #fbbc04; font-size: 1rem; letter-spacing: 1px; }
+.review-pop .rp-text { margin: 8px 0 6px; font-size: .86rem; line-height: 1.45; }
+.review-pop .rp-name { font-size: .78rem; font-weight: 600; margin: 0; }
+.review-pop .rp-name span { font-weight: 400; color: #666; }
+.review-pop .rp-close { position: absolute; top: 4px; right: 6px; border: 0; background: none; font-size: 1.2rem; line-height: 1; color: #888; cursor: pointer; padding: 4px; }
+@media (prefers-reduced-motion: reduce) { .review-pop { transition: none; } }
+@media (max-width: 600px) { .review-pop { left: 12px; bottom: 16px; } .review-pop .rp-body { padding: 10px 12px 9px; } .review-pop .rp-text { font-size: .78rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin: 5px 0 4px; } .review-pop .rp-name { font-size: .72rem; } .review-pop .rp-name span { display: none; } }
