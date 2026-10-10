@@ -112,7 +112,7 @@ const REVIEWS = [
   // { name: 'Customer name', stars: 5, text: 'Review text' }   // optional place: 'Dombivli' links the card to the Dombivli listing
   { name: 'S.T. Joisher', stars: 5, text: 'I have been using this brand for the past 8 years, and it is by far one of the best I’ve come across. The quality and durability of their products are outstanding, and they have consistently exceeded my expectations. I would highly recommend this brand to anyone looking for a reliable and long-lasting umbrella, it truly stands out as one of the best in the market.' },
   { name: 'Deepika Pawar', stars: 5, text: 'When it comes to promotional umbrellas gazebos and canopies Mukund enterprises is my go to place. I am very much inspired by the ethics and integrity of the way they do business.' },
-  { name: 'Hrithik Panchal', stars: 5, text: 'Best Quality Umbrellas for Retail and Wholesale both. Thanks Mr Mukund for your response 😛' },
+  { name: 'Hrithik Panchal', stars: 5, text: 'Best Quality Umbrellas for Retail and Wholesale both. Thanks Mr Mukund for your response 😊' },
   { name: 'Bikash Jha', stars: 5, text: 'Your umbrella is of very good quality and the rate is also better than others. And your communication with the customer is also satisfactory ! Very good' },
   { name: 'Mohit Rochlani', stars: 5, text: 'They have a good variety of umbrellas, with great quality and excellent service. The staff is helpful and the overall experience was very good.' },
   { name: 'Zeal Tanna', stars: 5, text: 'Great Quality, lovely designs' },
