@@ -230,3 +230,7 @@ footer .logo { display: inline-block; margin-bottom: 16px; }
 .related a:hover { background: #000; color: #fff; }
 .product h3 a:hover { color: var(--accent); }
 @media (max-width: 900px) { .pd-grid { grid-template-columns: 1fr; gap: 30px; } }
+a.img { display: grid; }
+.product .details { font-size: .78rem; font-weight: 600; color: #000; text-decoration: underline; text-underline-offset: 3px; }
+.product .details:hover { color: var(--accent); }
+.product h3 a { text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
