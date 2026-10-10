@@ -110,8 +110,13 @@ if (car) {
 // Google review pop-up (bottom-left). Add real reviews to REVIEWS; the pop-up stays hidden while the list is empty.
 const REVIEWS = [
   // { name: 'Customer name', stars: 5, text: 'Review text' }   // optional place: 'Dombivli' links the card to the Dombivli listing
+  { name: 'S.T. Joisher', stars: 5, text: 'I have been using this brand for the past 8 years, and it is by far one of the best I’ve come across. The quality and durability of their products are outstanding, and they have consistently exceeded my expectations. I would highly recommend this brand to anyone looking for a reliable and long-lasting umbrella, it truly stands out as one of the best in the market.' },
+  { name: 'Deepika Pawar', stars: 5, text: 'When it comes to promotional umbrellas gazebos and canopies Mukund enterprises is my go to place. I am very much inspired by the ethics and integrity of the way they do business.' },
+  { name: 'Hrithik Panchal', stars: 5, text: 'Best Quality Umbrellas for Retail and Wholesale both. Thanks Mr Mukund for your response 😛' },
   { name: 'Bikash Jha', stars: 5, text: 'Your umbrella is of very good quality and the rate is also better than others. And your communication with the customer is also satisfactory ! Very good' },
   { name: 'Mohit Rochlani', stars: 5, text: 'They have a good variety of umbrellas, with great quality and excellent service. The staff is helpful and the overall experience was very good.' },
+  { name: 'Zeal Tanna', stars: 5, text: 'Great Quality, lovely designs' },
+  { name: 'NIKHILESH MANE', stars: 5, text: 'Brilliant product & service' },
   { name: 'Kunal Patil', stars: 5, text: 'Har Har Mahadev 🙏 Our First Exibation Stall at Shiv Mandir ,Sagaon...... Very Good Quality' },
   { name: 'sruthi sree', stars: 5, text: 'Nice quality,had good experience with mukund enterprises and I am very happy with this products.' },
   { name: 'Gaurav Aggarwal', stars: 5, place: 'Dombivli', text: 'Great work and good services' },
@@ -138,7 +143,12 @@ const REVIEW_LINKS = {
   let i = 0, timer, stopped = false;
   const show = () => {
     const r = list[i % list.length]; i++;
-    const text = r.text.length > 180 ? r.text.slice(0, 177).trim() + '…' : r.text;
+    // long reviews: keep whole sentences up to ~230 characters, otherwise cut at a word
+    let text = r.text;
+    if (text.length > 230) {
+      const cut = text.slice(0, 230), end = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('! '));
+      text = end > 80 ? cut.slice(0, end + 1) + ' …' : cut.slice(0, cut.lastIndexOf(' ')) + '…';
+    }
     box.innerHTML = `<button class="rp-close" aria-label="Close reviews">×</button>
       <a class="rp-body" href="${REVIEW_LINKS[r.place] || REVIEW_LINKS.Kalbadevi}" target="_blank" rel="noopener">
         <div class="rp-top">${G}<span class="rp-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span></div>
