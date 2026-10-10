@@ -245,4 +245,4 @@ a.img { display: grid; }
 .review-pop .rp-name span { font-weight: 400; color: #666; }
 .review-pop .rp-close { position: absolute; top: 4px; right: 6px; border: 0; background: none; font-size: 1.2rem; line-height: 1; color: #888; cursor: pointer; padding: 4px; }
 @media (prefers-reduced-motion: reduce) { .review-pop { transition: none; } }
-@media (max-width: 600px) { .review-pop { left: 12px; bottom: 16px; } .review-pop .rp-body { padding: 10px 12px 9px; } .review-pop .rp-text { font-size: .78rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin: 5px 0 4px; } .review-pop .rp-name { font-size: .72rem; } .review-pop .rp-name span { display: none; } }
+@media (max-width: 600px) { .review-pop { left: 12px; bottom: 16px; } .review-pop .rp-body { padding: 10px 12px 9px; } .review-pop .rp-text { font-size: .78rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin: 5px 0 4px; } .review-pop .rp-name { font-size: .72rem; } }
