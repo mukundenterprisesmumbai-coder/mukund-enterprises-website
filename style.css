@@ -258,3 +258,11 @@ nav a.active::after { background: var(--saffron); }
 .btn[href*="contact.html"]::after, .btn[data-wa]::after, button.btn[type="submit"]::after { background: var(--saffron); border-color: var(--saffron); color: var(--navy); }
 .product .quote { margin: auto -22px -22px; padding: 14px 22px; border-top: 0; background: var(--saffron); color: var(--navy); font-weight: 600; }
 .product .quote:hover { background: #e3842f; color: var(--navy); }
+
+/* Placeholder for facts the owner still has to confirm. Remove every one before going live. */
+mark.todo { background: #FFE58F; color: #5C3B00; padding: 1px 6px; font-size: .85em; font-weight: 600; border: 1px dashed #B8621B; }
+.hero .crumbs, .hero .crumbs a { color: rgba(255,255,255,.75); }
+/* Popular searches strip on the products page */
+.searches { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.searches a { border: 1px solid var(--line); background: #fff; padding: 8px 14px; font-size: .85rem; }
+.searches a:hover { border-color: var(--navy); }
