@@ -151,7 +151,7 @@ textarea { min-height: 120px; resize: vertical; border: 1px solid #bbb; padding:
 
 /* Footer */
 footer { background: var(--black); color: #aaa; padding: 64px 0 28px; font-size: .85rem; }
-.foot { display: grid; grid-template-columns: 1.1fr .7fr 1.6fr; gap: 40px; margin-bottom: 44px; }
+.foot { display: grid; grid-template-columns: 1fr .6fr .9fr 1.5fr; gap: 40px; margin-bottom: 44px; }
 footer h4 { font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: #fff; margin-bottom: 16px; font-weight: 500; }
 footer li { margin-bottom: 9px; }
 footer li b { color: #ddd; font-weight: 600; }
@@ -258,3 +258,14 @@ nav a.active::after { background: var(--saffron); }
 .btn[href*="contact.html"]::after, .btn[data-wa]::after, button.btn[type="submit"]::after { background: var(--saffron); border-color: var(--saffron); color: var(--navy); }
 .product .quote { margin: auto -22px -22px; padding: 14px 22px; border-top: 0; background: var(--saffron); color: var(--navy); font-weight: 600; }
 .product .quote:hover { background: #e3842f; color: var(--navy); }
+
+/* Landing pages (products, industries, areas) */
+.g5 { grid-template-columns: repeat(5, 1fr); }
+.lp-hero .crumbs { color: #c9cfdc; margin-bottom: 22px; }
+.lp-hero .crumbs a:hover { color: #fff; }
+.lp-hero .btns { margin-top: 32px; }
+.steps .card { padding: 26px 22px; }
+.steps .card h3 { font-size: 1.02rem; }
+.pd-img img.icon-big { width: 40%; height: auto; filter: brightness(.3); opacity: .7; }
+@media (max-width: 1100px) { .g5 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 700px) { .g5 { grid-template-columns: 1fr 1fr; } }

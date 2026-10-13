@@ -2,8 +2,29 @@
 const SITE = {
   phone: '+91 91378 78456',   // shown on the site
   whatsapp: '919137878456',      // digits only
+  ga4: '',                       // Google Analytics 4 Measurement ID, e.g. 'G-XXXXXXXXXX' (blank = off)
+  clarity: '',                   // Microsoft Clarity project ID (blank = off)
 };
 // --------------------
+
+// visitor analytics: loads only when an ID is filled in above
+window.dataLayer = window.dataLayer || [];
+function gtag() { dataLayer.push(arguments); }
+function track(name, params) { if (SITE.ga4) gtag('event', name, Object.assign({ page_path: location.pathname }, params || {})); }
+if (SITE.ga4) {
+  const s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + SITE.ga4; document.head.appendChild(s);
+  gtag('js', new Date()); gtag('config', SITE.ga4);
+}
+if (SITE.clarity) {
+  (function (c, l, a, r, i) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; const t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i; l.head.appendChild(t); })(window, document, 'clarity', 'script', SITE.clarity);
+}
+// count the actions that matter: WhatsApp taps, calls, quote buttons and price requests
+document.addEventListener('click', ev => {
+  const a = ev.target.closest('a'); if (!a) return;
+  if (a.matches('[data-wa]')) track(a.closest('.price') ? 'price_request' : 'whatsapp_click', { label: (a.dataset.wa || '').slice(0, 90) });
+  else if ((a.getAttribute('href') || '').startsWith('tel:')) track('call_click', { label: a.getAttribute('href') });
+  else if (/contact\.html\?/.test(a.getAttribute('href') || '')) track('quote_click', { label: decodeURIComponent((a.getAttribute('href').split('product=')[1] || '')).slice(0, 90) });
+}, true);
 
 document.querySelectorAll('[data-phone]').forEach(e => { e.textContent = SITE.phone; if (e.tagName === 'A') e.href = 'tel:' + SITE.phone.replace(/\s/g, ''); });
 document.querySelectorAll('[data-wa]').forEach(e => {
@@ -29,7 +50,7 @@ fbtns.forEach(b => b.addEventListener('click', () => {
 const form = document.getElementById('enquiry');
 if (form) {
   const p = new URLSearchParams(location.search);
-  if (p.get('product')) form.message.value = 'Hi, I would like a quote for: ' + p.get('product');
+  if (p.get('product')) { form.product.value = p.get('product'); form.message.value = 'Hi, I would like a quote for: ' + p.get('product'); }
   if (p.get('topic')) form.topic.value = p.get('topic');
   form.addEventListener('submit', async e => {
     e.preventDefault();
@@ -39,12 +60,16 @@ if (form) {
     ok.style.display = err.style.display = 'none';
     btn.disabled = true; btn.firstChild.textContent = 'Sending…';
     // WhatsApp stays available as an optional, faster channel (visitor chooses to use it)
-    const text = `New enquiry\nName: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email')}\nTopic: ${f.get('topic')}\nQuantity: ${f.get('qty') || '-'}\n\n${f.get('message')}`;
+    const text = `New enquiry\nName: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email')}\nTopic: ${f.get('topic')}\nProduct: ${f.get('product') || '-'}\nQuantity: ${f.get('qty') || '-'}\nCity: ${f.get('city') || '-'}\nNeeded by: ${f.get('needby') || '-'}${f.get('logo') && f.get('logo').size ? '\nLogo: attached to the enquiry form' : ''}\n\n${f.get('message')}`;
     form.querySelectorAll('.wa-link').forEach(a => a.href = 'https://wa.me/' + SITE.whatsapp + '?text=' + encodeURIComponent(text));
     try {
       // saved by Netlify Forms and emailed to the business
-      const r = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(f).toString() });
+      // sent as multipart so the logo file (if any) is saved with the enquiry
+      const logo = f.get('logo');
+      if (logo && logo.size > 8 * 1024 * 1024) { alert('The logo file is larger than 8 MB. Please send a smaller file, or share it on WhatsApp.'); btn.disabled = false; btn.firstChild.textContent = 'Send message'; return; }
+      const r = await fetch('/', { method: 'POST', body: f });
       if (!r.ok) throw new Error(r.status);
+      track('generate_lead', { method: 'form', topic: f.get('topic') });
       ok.style.display = 'block';
       form.reset();
       // enquiry is saved; now take the visitor straight to WhatsApp with their details filled in
