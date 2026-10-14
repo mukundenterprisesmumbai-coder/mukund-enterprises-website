@@ -186,6 +186,10 @@ footer .logo { display: inline-block; margin-bottom: 16px; }
 .gallery img { width: 100%; height: auto; display: block; background: #eee; }
 .gallery figure.wide { grid-column: 1 / -1; }
 .gallery figcaption { font-size: .78rem; letter-spacing: .08em; color: #666; margin-top: 8px; }
+/* Branding work gallery (promotional umbrella page): square design layouts, 4 across */
+.gallery.designs { grid-template-columns: repeat(4, 1fr); margin-top: 24px; }
+.gallery.designs img { background: #fff; border: 1px solid var(--line); }
+@media (max-width: 900px) { .gallery.designs { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 700px) { .gallery { grid-template-columns: 1fr; } }
 
 /* Google Maps links on the Contact page */
