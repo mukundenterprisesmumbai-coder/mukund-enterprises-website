@@ -86,9 +86,11 @@ const ready = new Set([0]);
 // load the later photos after the page is ready, and only show a photo once it has fully loaded
 window.addEventListener('load', () => slides.forEach((s, i) => {
   if (!s.dataset.bg) return;
+  // phones get a tall crop so the photo isn't blown up
+  const src = (window.matchMedia('(max-width: 760px)').matches && s.dataset.bgPhone) || s.dataset.bg;
   const img = new Image();
-  img.onload = () => { s.style.backgroundImage = "url('" + s.dataset.bg + "')"; ready.add(i); };
-  img.src = s.dataset.bg;
+  img.onload = () => { s.style.backgroundImage = "url('" + src + "')"; ready.add(i); };
+  img.src = src;
 }));
 if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let cur = 0;
