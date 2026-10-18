@@ -6,6 +6,15 @@
 <title>Contact | Mukund Enterprises</title>
 <meta name="description" content="Contact Mukund Enterprises (Kalbadevi, Mumbai, Dombivli and Bhiwandi) for umbrellas, canopies and bulk branded orders.">
 <link rel="canonical" href="https://shadowumbrellas.in/contact.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact | Mukund Enterprises">
+<meta property="og:description" content="Contact Mukund Enterprises (Kalbadevi, Mumbai, Dombivli and Bhiwandi) for umbrellas, canopies and bulk branded orders.">
+<meta property="og:url" content="https://shadowumbrellas.in/contact.html">
+<meta property="og:image" content="https://shadowumbrellas.in/assets/hero/promenade-sunset-a.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -48,7 +57,7 @@
       <h2>Send us a <em>message</em></h2>
       <p class="lead">Fill this in and we will get back to you. We will reply by phone, email or WhatsApp.</p>
     </div>
-    <form id="enquiry" name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <form id="enquiry" name="enquiry" method="POST" enctype="multipart/form-data" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="enquiry">
       <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
       <div class="row">
@@ -65,7 +74,16 @@
             <option>Something else</option>
           </select></div>
       </div>
-      <div><label for="qty">Approx. quantity</label><input id="qty" name="qty" placeholder="e.g. 500 pieces"></div>
+      <div><label for="product">Product</label><input id="product" name="product" placeholder="e.g. Promotional garden umbrella, 7 ft"></div>
+      <div class="row">
+        <div><label for="qty">Approx. quantity</label><input id="qty" name="qty" placeholder="e.g. 500 pieces"></div>
+        <div><label for="city">Delivery city</label><input id="city" name="city" placeholder="e.g. Thane"></div>
+      </div>
+      <div class="row">
+        <div><label for="needby">Needed by</label><input id="needby" name="needby" type="date"></div>
+        <div><label for="logo">Your logo (optional)</label><input id="logo" name="logo" type="file" accept=".pdf,.cdr,.ai,.eps,.svg,.png,.jpg,.jpeg"></div>
+      </div>
+      <p class="note" style="margin-top:-6px">Logo: CDR or PDF preferred, up to 8 MB.</p>
       <div><label for="message">Message*</label><textarea id="message" name="message" required></textarea></div>
       <button class="btn" type="submit">Send message</button>
       <p class="ok">Thank you! Your enquiry has been received and our team will contact you shortly. Taking you to WhatsApp so you can chat with us directly… <a class="wa-link" target="_blank" rel="noopener">Open WhatsApp now →</a></p>
@@ -79,6 +97,7 @@
   <div class="foot">
     <div><div class="logo" style="display:inline-block;margin-bottom:16px">Mukund<br>Enterprises</div><p>Manufacturer &amp; wholesale trader of promotional umbrellas, canopies and gazebo tents. Kalbadevi, Mumbai, Dombivli and Bhiwandi, Thane.</p></div>
     <div><h4>Explore</h4><ul><li><a href="products.html">Products</a></li><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li><li><a href="https://g.page/r/CaNJtVLDHDOgEBM/review" target="_blank" rel="noopener">★ Review us on Google</a></li></ul></div>
+    <div><h4>For businesses</h4><ul><li><a href="promotional-umbrellas.html">Promotional umbrellas</a></li><li><a href="promotional-garden-umbrellas.html">Promotional garden umbrellas</a></li><li><a href="canopy-tent-printing.html">Printed canopy tents</a></li><li><a href="gazebo-tents.html">Gazebo tents</a></li><li><a href="corporate-gift-umbrellas.html">Corporate gift umbrellas</a></li><li><a href="areas-we-serve.html">Areas &amp; industries we serve</a></li></ul></div>
     <div><h4>Contact</h4><ul><li><a data-phone href="#"></a></li><li><a href="tel:+919320405164">+91 93204 05164</a></li><li><a href="tel:+919821405164">+91 98214 05164</a></li><li><b>Kalbadevi, Mumbai</b><br>26/28 Nirnay Sagar, Press Room No. B/4-A, Ground Floor, Dr. M.B. Velkar Street, Kolbhat Lane, Kalbadevi, Mumbai, Maharashtra 400002</li><li><b>Dombivli West</b><br>15, Eshwar Kripa Bldg, Ghanshyam Gupte Road, Jai Hind Colony, Dombivli West, Maharashtra 421202</li><li><b>Bhiwandi (factory outlet)</b><br>C-14, Gala No. 104, Parashnath Complex, Dapoda Road, Bhiwandi, Thane, Maharashtra 421302</li></ul></div>
   </div>
   <p class="copy">© 2026 Mukund Enterprises. All rights reserved. GSTIN 27AGCPJ9001C1ZX</p>

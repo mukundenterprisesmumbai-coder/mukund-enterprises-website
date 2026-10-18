@@ -31,6 +31,4 @@ garden-umbrella-with-stand.jpg
 side-pole-cantilever-umbrella.jpg
 pop-up-canopy-10x10.jpg
 canopy-tent-with-side-walls.jpg
-wet-umbrella-bag-stand.jpg
 umbrella-stand.jpg
-umbrella-cover.jpg
