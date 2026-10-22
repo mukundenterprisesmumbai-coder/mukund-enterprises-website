@@ -189,3 +189,23 @@ const REVIEW_LINKS = {
   box.addEventListener('mouseleave', () => { if (!stopped) timer = setTimeout(() => { box.classList.remove('show'); timer = setTimeout(show, 3000); }, 3000); });
   setTimeout(show, 4000);
 })();
+
+// stats count up from 0 when they scroll into view (e.g. "50K+" runs 0 → 50, keeping "K+")
+(() => {
+  const els = [...document.querySelectorAll('.stat b')];
+  if (!els.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const run = el => {
+    const m = el.textContent.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/); if (!m) return;
+    const [, pre, num, post] = m, end = parseFloat(num), dec = (num.split('.')[1] || '').length, t0 = performance.now(), dur = 2200;
+    const step = now => {
+      const p = Math.min((now - t0) / dur, 1), v = end * (1 - Math.pow(1 - p, 2));
+      el.textContent = pre + (p < 1 ? v.toFixed(dec) : num) + post;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    el.textContent = pre + (0).toFixed(dec) + post;
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); run(e.target); } }), { threshold: 0.6 });
+  els.forEach(el => io.observe(el));
+})();
