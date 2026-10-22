@@ -62,10 +62,10 @@ em { font-style: normal; color: var(--accent); }
 .hero-slides { position: absolute; inset: 0; z-index: 0; }
 .hero-slides .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease; }
 .hero-slides .slide.on { opacity: 1; }
-.hero-slides .slide.first { background-image: url('assets/hero/terrace.jpg'); }
+.hero-slides .slide.first { background-image: url('assets/hero/terrace.jpg'); background-image: image-set(url('assets/hero/terrace.webp') type('image/webp'), url('assets/hero/terrace.jpg') type('image/jpeg')); }
 .hero-slides::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(27,42,74,.78) 0%, rgba(27,42,74,0) 32%), linear-gradient(90deg, rgba(27,42,74,.80) 0%, rgba(27,42,74,.55) 40%, rgba(27,42,74,.12) 75%, rgba(27,42,74,0) 100%); }
 @media (max-width: 760px) {
-  .hero-slides .slide.first { background-image: url('assets/hero/terrace-phone.jpg'); }
+  .hero-slides .slide.first { background-image: url('assets/hero/terrace-phone.jpg'); background-image: image-set(url('assets/hero/terrace-phone.webp') type('image/webp'), url('assets/hero/terrace-phone.jpg') type('image/jpeg')); }
   .hero-slides::after { background: linear-gradient(180deg, rgba(27,42,74,.55) 0%, rgba(27,42,74,.68) 55%, rgba(27,42,74,.7) 100%); }
 }
 .hero > .wrap { position: relative; z-index: 1; }

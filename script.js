@@ -88,9 +88,12 @@ window.addEventListener('load', () => slides.forEach((s, i) => {
   if (!s.dataset.bg) return;
   // phones get a tall crop so the photo isn't blown up
   const src = (window.matchMedia('(max-width: 760px)').matches && s.dataset.bgPhone) || s.dataset.bg;
+  // try the smaller WebP copy first, fall back to the JPG
+  const webp = src.replace(/\.jpg$/, '.webp');
   const img = new Image();
-  img.onload = () => { s.style.backgroundImage = "url('" + src + "')"; ready.add(i); };
-  img.src = src;
+  img.onload = () => { s.style.backgroundImage = "url('" + img.src + "')"; ready.add(i); };
+  img.onerror = () => { if (img.src.endsWith('.webp')) img.src = src; };
+  img.src = webp;
 }));
 if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let cur = 0;
