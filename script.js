@@ -7,17 +7,21 @@ const SITE = {
 };
 // --------------------
 
-// visitor analytics: loads only when an ID is filled in above
+// visitor analytics: loads only when an ID is filled in above.
+// The tracking code itself is downloaded after the page has finished loading, so it never slows the first view;
+// visits and clicks are still counted (they wait in the queue until the code arrives).
 window.dataLayer = window.dataLayer || [];
 function gtag() { dataLayer.push(arguments); }
 function track(name, params) { if (SITE.ga4) gtag('event', name, Object.assign({ page_path: location.pathname }, params || {})); }
-if (SITE.ga4) {
-  const s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + SITE.ga4; document.head.appendChild(s);
-  gtag('js', new Date()); gtag('config', SITE.ga4);
+if (SITE.ga4) { gtag('js', new Date()); gtag('config', SITE.ga4); }
+if (SITE.clarity) window.clarity = window.clarity || function () { (window.clarity.q = window.clarity.q || []).push(arguments); };
+function loadAnalytics() {
+  const add = src => { const s = document.createElement('script'); s.async = true; s.src = src; document.head.appendChild(s); };
+  if (SITE.ga4) add('https://www.googletagmanager.com/gtag/js?id=' + SITE.ga4);
+  if (SITE.clarity) add('https://www.clarity.ms/tag/' + SITE.clarity);
 }
-if (SITE.clarity) {
-  (function (c, l, a, r, i) { c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); }; const t = l.createElement(r); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + i; l.head.appendChild(t); })(window, document, 'clarity', 'script', SITE.clarity);
-}
+if (document.readyState === 'complete') setTimeout(loadAnalytics, 0);
+else window.addEventListener('load', () => setTimeout(loadAnalytics, 0));
 // count the actions that matter: WhatsApp taps, calls, quote buttons and price requests
 document.addEventListener('click', ev => {
   const a = ev.target.closest('a'); if (!a) return;
@@ -84,11 +88,13 @@ if (form) {
 const slides = document.querySelectorAll('.hero-slides .slide');
 const ready = new Set([0]);
 // load the later photos after the page is ready, and only show a photo once it has fully loaded
+// phones get the smaller copy of each photo
 window.addEventListener('load', () => slides.forEach((s, i) => {
-  if (!s.dataset.bg) return;
+  const src = (window.innerWidth <= 800 && s.dataset.bgSm) || s.dataset.bg;
+  if (!src) return;
   const img = new Image();
-  img.onload = () => { s.style.backgroundImage = "url('" + s.dataset.bg + "')"; ready.add(i); };
-  img.src = s.dataset.bg;
+  img.onload = () => { s.style.backgroundImage = "url('" + src + "')"; ready.add(i); };
+  img.src = src;
 }));
 if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let cur = 0;
@@ -176,7 +182,7 @@ const REVIEW_LINKS = {
     }
     box.innerHTML = `<button class="rp-close" aria-label="Close reviews">×</button>
       <a class="rp-body" href="${REVIEW_LINKS[r.place] || REVIEW_LINKS.Kalbadevi}" target="_blank" rel="noopener">
-        <div class="rp-top">${G}<span class="rp-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span></div>
+        <div class="rp-top">${G}<span class="rp-stars" role="img" aria-label="${r.stars} out of 5 stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span></div>
         <p class="rp-text">“${esc(text)}”</p>
         <p class="rp-name">${esc(r.name)} <span>· Google review</span></p></a>`;
     box.querySelector('.rp-close').onclick = () => { stopped = true; clearTimeout(timer); box.classList.remove('show'); try { sessionStorage.setItem('reviewsClosed', '1'); } catch (e) {} };
