@@ -1,4 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Poppins, served from our own site (no extra trip to Google Fonts) */
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/poppins-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/poppins-400-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/poppins-500-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/poppins-500-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/poppins-600-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/poppins-600-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/poppins-700-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/poppins-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* stand-in while Poppins loads, sized to match it so the text doesn't jump when the real font arrives */
+@font-face { font-family: 'Poppins Fallback'; src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('Helvetica'); ascent-override: 92.83%; descent-override: 30.94%; line-gap-override: 8.84%; size-adjust: 113.15%; }
 
 :root {
   --black: #1B2A4A;
@@ -12,13 +22,14 @@
   --line: #EADFCD;
   --dline: rgba(255, 255, 255, .22);
   --accent: #B8621B;
-  --sans: 'Poppins', Arial, Helvetica, sans-serif;
+  --sans: 'Poppins', 'Poppins Fallback', Arial, Helvetica, sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: var(--sans); background: var(--cream); color: var(--ink); line-height: 1.7; font-weight: 400; font-size: 15px; -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; display: block; }
+picture { display: contents; }   /* AVIF wrapper: the <img> inside keeps its usual layout */
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 .wrap { max-width: 1760px; margin: 0 auto; padding: 0 clamp(28px, 4vw, 64px); }
@@ -62,10 +73,10 @@ em { font-style: normal; color: var(--accent); }
 .hero-slides { position: absolute; inset: 0; z-index: 0; }
 .hero-slides .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease; }
 .hero-slides .slide.on { opacity: 1; }
-.hero-slides .slide.first { background-image: url('assets/hero/terrace.jpg'); background-image: image-set(url('assets/hero/terrace.webp') type('image/webp'), url('assets/hero/terrace.jpg') type('image/jpeg')); }
+.hero-slides .slide.first { background-image: url('assets/hero/terrace.jpg'); background-image: image-set(url('assets/hero/terrace.avif') type('image/avif'), url('assets/hero/terrace.webp') type('image/webp'), url('assets/hero/terrace.jpg') type('image/jpeg')); }
 .hero-slides::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(27,42,74,.78) 0%, rgba(27,42,74,0) 32%), linear-gradient(90deg, rgba(27,42,74,.80) 0%, rgba(27,42,74,.55) 40%, rgba(27,42,74,.12) 75%, rgba(27,42,74,0) 100%); }
 @media (max-width: 760px) {
-  .hero-slides .slide.first { background-image: url('assets/hero/terrace-phone.jpg'); background-image: image-set(url('assets/hero/terrace-phone.webp') type('image/webp'), url('assets/hero/terrace-phone.jpg') type('image/jpeg')); }
+  .hero-slides .slide.first { background-image: url('assets/hero/terrace-phone.jpg'); background-image: image-set(url('assets/hero/terrace-phone.avif') type('image/avif'), url('assets/hero/terrace-phone.webp') type('image/webp'), url('assets/hero/terrace-phone.jpg') type('image/jpeg')); }
   .hero-slides::after { background: linear-gradient(180deg, rgba(27,42,74,.55) 0%, rgba(27,42,74,.68) 55%, rgba(27,42,74,.7) 100%); }
 }
 .hero > .wrap { position: relative; z-index: 1; }

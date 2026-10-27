@@ -88,12 +88,12 @@ window.addEventListener('load', () => slides.forEach((s, i) => {
   if (!s.dataset.bg) return;
   // phones get a tall crop so the photo isn't blown up
   const src = (window.matchMedia('(max-width: 760px)').matches && s.dataset.bgPhone) || s.dataset.bg;
-  // try the smaller WebP copy first, fall back to the JPG
-  const webp = src.replace(/\.jpg$/, '.webp');
+  // try the smallest copy first (AVIF), then WebP, then the JPG
+  const tries = [src.replace(/\.jpg$/, '.avif'), src.replace(/\.jpg$/, '.webp'), src];
   const img = new Image();
   img.onload = () => { s.style.backgroundImage = "url('" + img.src + "')"; ready.add(i); };
-  img.onerror = () => { if (img.src.endsWith('.webp')) img.src = src; };
-  img.src = webp;
+  img.onerror = () => { tries.shift(); if (tries.length) img.src = tries[0]; };
+  img.src = tries[0];
 }));
 if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let cur = 0;

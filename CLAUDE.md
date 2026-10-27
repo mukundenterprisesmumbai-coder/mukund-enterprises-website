@@ -18,3 +18,9 @@ Owner is non-technical: explain changes in plain language and show a preview aft
 - Each product card in `products.html` loads `assets/products/<name>.jpg`; the expected names are listed in `assets/products/README-file-names.txt`.
 - Names must match exactly: lowercase, hyphens, `.jpg`.
 - Before adding a photo, check its real format (owner's photos are sometimes PNGs renamed to .jpg). Convert to a real JPEG, max 800×800, quality ~82, progressive — target under ~150 KB.
+- After adding or replacing any photo in `assets/products`, `assets/branding`, `assets/factory` or `assets/hero`, run `python3 tools/make-avif.py` (needs Pillow with AVIF). It makes the smaller AVIF copies at the same pixel size. Pages show them through `<picture><source type="image/avif" ...>` around the `<img>`, with the JPG as fallback; new `<img>` tags for these photos should get the same wrapper.
+- Browser caching is set in `_headers`: photos are cached for 30 days, so give a replaced photo a new file name.
+
+## Speed
+- Poppins is self-hosted in `assets/fonts/` (latin + latin-ext, weights 400-700); every page preloads the 4 latin files. Don't add Google Fonts links back.
+- On `products.html` only the first card photo loads eagerly (`fetchpriority="high"`); the rest stay `loading="lazy"`.
