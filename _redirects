@@ -1,2 +1,6 @@
+# Send www to the main address so Google keeps one copy of each page
+http://www.shadowumbrellas.in/*  https://shadowumbrellas.in/:splat  301!
+https://www.shadowumbrellas.in/*  https://shadowumbrellas.in/:splat  301!
+
 /products/umbrella-cover.html  /products.html  301
 /products/wet-umbrella-bag-stand.html  /products.html  301
