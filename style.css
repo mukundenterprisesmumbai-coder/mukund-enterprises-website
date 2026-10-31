@@ -17,7 +17,7 @@
   --saffron-dark: #B8621B;
   --cream: #FFF8EE;
   --ink: #222;
-  --grey: #999;
+  --grey: #6B6B6B;
   --soft: #FCEFDC;
   --line: #EADFCD;
   --dline: rgba(255, 255, 255, .22);
@@ -76,7 +76,7 @@ em { font-style: normal; color: var(--accent); }
 .hero-slides .slide.first { background-image: url('assets/hero/terrace.jpg'); background-image: image-set(url('assets/hero/terrace.avif') type('image/avif'), url('assets/hero/terrace.webp') type('image/webp'), url('assets/hero/terrace.jpg') type('image/jpeg')); }
 .hero-slides::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(27,42,74,.78) 0%, rgba(27,42,74,0) 32%), linear-gradient(90deg, rgba(27,42,74,.80) 0%, rgba(27,42,74,.55) 40%, rgba(27,42,74,.12) 75%, rgba(27,42,74,0) 100%); }
 @media (max-width: 760px) {
-  .hero-slides .slide.first { background-image: url('assets/hero/terrace-phone.jpg'); background-image: image-set(url('assets/hero/terrace-phone.avif') type('image/avif'), url('assets/hero/terrace-phone.webp') type('image/webp'), url('assets/hero/terrace-phone.jpg') type('image/jpeg')); }
+  .hero-slides .slide.first { background-image: url('assets/hero/terrace-phone.jpg'); background-image: image-set(url('assets/hero/terrace-phone.webp') type('image/webp'), url('assets/hero/terrace-phone.jpg') type('image/jpeg')); }
   .hero-slides::after { background: linear-gradient(180deg, rgba(27,42,74,.55) 0%, rgba(27,42,74,.68) 55%, rgba(27,42,74,.7) 100%); }
 }
 .hero > .wrap { position: relative; z-index: 1; }
@@ -289,3 +289,11 @@ nav a.active::after { background: var(--saffron); }
 .pd-img img.icon-big { width: 40%; height: auto; filter: brightness(.3); opacity: .7; }
 @media (max-width: 1100px) { .g5 { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 700px) { .g5 { grid-template-columns: 1fr 1fr; } }
+
+/* home page: Google review quotes */
+.quote-card { margin: 0; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; }
+.quote-card:hover { transform: none; box-shadow: none; border-color: var(--line); }
+.quote-card .stars { color: #B06D00; letter-spacing: 2px; font-size: .95rem; }
+.quote-card blockquote { margin: 0; font-size: .9rem; color: #444; line-height: 1.65; flex: 1; }
+.quote-card figcaption { font-size: .8rem; font-weight: 600; color: var(--navy); }
+.reviews .btns { margin-top: 26px; }

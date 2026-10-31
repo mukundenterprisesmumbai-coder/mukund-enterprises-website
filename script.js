@@ -26,6 +26,16 @@ document.addEventListener('click', ev => {
   else if (/contact\.html\?/.test(a.getAttribute('href') || '')) track('quote_click', { label: decodeURIComponent((a.getAttribute('href').split('product=')[1] || '')).slice(0, 90) });
 }, true);
 
+// floating WhatsApp button: mention the page the visitor is on, so the first reply can be specific
+const waFloat = document.querySelector('a.wa[data-wa]');
+const pageH1 = document.querySelector('h1');
+if (waFloat && pageH1 && !/^\/(index\.html)?$/.test(location.pathname)) {
+  const topic = pageH1.textContent.replace(/\s+/g, ' ').trim().slice(0, 80);
+  waFloat.dataset.wa = 'Hi, I have an enquiry about: ' + topic + '\n' + location.href.split(/[?#]/)[0];
+}
+// count catalogue downloads
+document.addEventListener('click', ev => { const a = ev.target.closest('a[href$="catalogue.pdf"]'); if (a) track('catalogue_download', { label: location.pathname }); }, true);
+
 document.querySelectorAll('[data-phone]').forEach(e => { e.textContent = SITE.phone; if (e.tagName === 'A') e.href = 'tel:' + SITE.phone.replace(/\s/g, ''); });
 document.querySelectorAll('[data-wa]').forEach(e => {
   const msg = e.dataset.wa ? '?text=' + encodeURIComponent(e.dataset.wa) : '';
@@ -90,6 +100,7 @@ window.addEventListener('load', () => slides.forEach((s, i) => {
   const src = (window.matchMedia('(max-width: 760px)').matches && s.dataset.bgPhone) || s.dataset.bg;
   // try the smallest copy first (AVIF), then WebP, then the JPG
   const tries = [src.replace(/\.jpg$/, '.avif'), src.replace(/\.jpg$/, '.webp'), src];
+  if ('noAvif' in s.dataset) tries.shift();   // no AVIF copy (it wasn't smaller than the WebP)
   const img = new Image();
   img.onload = () => { s.style.backgroundImage = "url('" + img.src + "')"; ready.add(i); };
   img.onerror = () => { tries.shift(); if (tries.length) img.src = tries[0]; };

@@ -17,7 +17,7 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preload" as="image" href="assets/hero/terrace.avif" type="image/avif" media="(min-width: 761px)" fetchpriority="high">
-<link rel="preload" as="image" href="assets/hero/terrace-phone.avif" type="image/avif" media="(max-width: 760px)" fetchpriority="high">
+<link rel="preload" as="image" href="assets/hero/terrace-phone.webp" type="image/webp" media="(max-width: 760px)" fetchpriority="high">
 <link rel="preload" href="assets/fonts/poppins-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/poppins-500-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/poppins-600-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -41,7 +41,7 @@
 <section class="hero">
   <div class="hero-slides" aria-hidden="true">
     <div class="slide first on"></div>
-    <div class="slide" data-bg="assets/hero/rain-umbrella.jpg" data-bg-phone="assets/hero/rain-umbrella-phone.jpg"></div>
+    <div class="slide" data-no-avif data-bg="assets/hero/rain-umbrella.jpg" data-bg-phone="assets/hero/rain-umbrella-phone.jpg"></div>
     <div class="slide" data-bg="assets/hero/beach-parasols.jpg" data-bg-phone="assets/hero/beach-parasols-phone.jpg"></div>
     <div class="slide" data-bg="assets/hero/striped-umbrellas.jpg" data-bg-phone="assets/hero/striped-umbrellas-phone.jpg"></div>
   </div>
@@ -58,7 +58,6 @@
       <div class="stat"><b>50+</b><span>Product varieties available</span></div>
       <div class="stat"><b>3</b><span>Locations</span></div>
       <div class="stat"><b>4.7★</b><span>Google rating</span></div>
-    </div>
     </div>
   </div>
 </section>
@@ -90,7 +89,7 @@
       <div class="product" data-cat="Rain"><a class="img" href="products/wooden-stick-umbrella.html"><picture><source type="image/avif" srcset="assets/products/wooden-stick-umbrella-480.avif 480w, assets/products/wooden-stick-umbrella.avif 800w" sizes="(max-width: 760px) 100vw, (max-width: 1000px) 50vw, 33vw"><img class="ph" loading="lazy" src="assets/products/wooden-stick-umbrella.jpg" alt="Wooden Long Stick J Shape Umbrella" onerror="var p=this.parentNode;if(p.querySelector('source')){p.querySelectorAll('source').forEach(function(s){s.remove()});this.src=this.src}else{this.onerror=null;this.src='assets/umbrella.svg';this.classList.add('icon')}"></picture></a><div class="body"><span class="cat">Rain &amp; Sun</span><h3><a href="products/wooden-stick-umbrella.html">Wooden Long Stick J Shape Umbrella</a></h3><p class="price"><a data-wa="Hi, please share your best price for: Wooden Long Stick J Shape Umbrella&#10;https://shadowumbrellas.in/products/wooden-stick-umbrella.html">From ₹539 + best price on WhatsApp →</a></p><a class="details" href="products/wooden-stick-umbrella.html">View details →</a><a class="quote" href="contact.html?topic=Product%20question&product=Wooden%20Long%20Stick%20J%20Shape%20Umbrella">Get Best Quote →</a></div></div>
     </div>
     </div>
-    <div class="btns"><a class="btn ghost" href="products.html">View all products</a></div>
+    <div class="btns"><a class="btn ghost" href="products.html">View all products</a><a class="btn ghost" href="mukund-enterprises-catalogue.pdf" target="_blank" rel="noopener">Download catalogue (PDF, 3 MB)</a></div>
   </div>
 </section>
 
@@ -135,6 +134,14 @@
   </div>
 </section>
 
+<section class="reviews">
+  <div class="wrap">
+    <div class="section-head"><p class="eyebrow">4.7★ on Google</p><h2>What our <em>buyers</em> say</h2></div>
+    <div class="grid g4"><figure class="card quote-card"><p class="stars" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“I have been using this brand for the past 8 years, and it is by far one of the best I’ve come across. The quality and durability of their products are outstanding.”</blockquote><figcaption>S.T. Joisher · Google review</figcaption></figure><figure class="card quote-card"><p class="stars" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“When it comes to promotional umbrellas, gazebos and canopies, Mukund Enterprises is my go-to place. I am very much inspired by the ethics and integrity of the way they do business.”</blockquote><figcaption>Deepika Pawar · Google review</figcaption></figure><figure class="card quote-card"><p class="stars" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“Your umbrella is of very good quality and the rate is also better than others. And your communication with the customer is also satisfactory!”</blockquote><figcaption>Bikash · Google review</figcaption></figure><figure class="card quote-card"><p class="stars" aria-label="5 out of 5 stars">★★★★★</p><blockquote>“They have a good variety of umbrellas, with great quality and excellent service. The staff is helpful and the overall experience was very good.”</blockquote><figcaption>Mohit Rochlani · Google review</figcaption></figure></div>
+    <div class="btns"><a class="btn ghost" href="https://maps.google.com/?cid=11543601895112526243" target="_blank" rel="noopener">Read all reviews on Google</a></div>
+  </div>
+</section>
+
 <section class="band dark">
   <div class="wrap">
     <p class="eyebrow">Bulk &amp; B2B</p>
@@ -151,7 +158,7 @@
   <div class="foot">
     <div><div class="logo" style="display:inline-block;margin-bottom:16px">Mukund<br>Enterprises</div><p>Manufacturer &amp; wholesale trader of promotional umbrellas, canopies and gazebo tents. Kalbadevi, Mumbai, Dombivli and Bhiwandi, Thane. Delivery across India.</p></div>
     <div><h4>Explore</h4><ul><li><a href="products.html">Products</a></li><li><a href="about.html">About</a></li><li><a href="faq.html">FAQ</a></li><li><a href="buying-guides.html">Buying guides</a></li><li><a href="contact.html">Contact</a></li><li><a href="https://g.page/r/CaNJtVLDHDOgEBM/review" target="_blank" rel="noopener">★ Review us on Google</a></li></ul></div>
-    <div><h4>For businesses</h4><ul><li><a href="promotional-umbrellas.html">Promotional umbrellas</a></li><li><a href="promotional-garden-umbrellas.html">Promotional garden umbrellas</a></li><li><a href="canopy-tent-printing.html">Printed canopy tents</a></li><li><a href="gazebo-tents.html">Gazebo tents</a></li><li><a href="corporate-gift-umbrellas.html">Corporate gift umbrellas</a></li><li><a href="areas-we-serve.html">Areas &amp; industries we serve</a></li></ul></div>
+    <div><h4>For businesses</h4><ul><li><a href="promotional-umbrellas.html">Promotional umbrellas</a></li><li><a href="promotional-garden-umbrellas.html">Promotional garden umbrellas</a></li><li><a href="canopy-tent-printing.html">Printed canopy tents</a></li><li><a href="gazebo-tents.html">Gazebo tents</a></li><li><a href="corporate-gift-umbrellas.html">Corporate gift umbrellas</a></li><li><a href="bulk-government-orders.html">Bulk &amp; government orders</a></li><li><a href="monsoon-umbrella-booking.html">Monsoon 2027 booking</a></li><li><a href="areas-we-serve.html">Areas &amp; industries we serve</a></li></ul></div>
     <div><h4>Contact</h4><ul><li><a data-phone href="#"></a></li><li><a href="tel:+919320405164">+91 93204 05164</a></li><li><a href="tel:+919821405164">+91 98214 05164</a></li><li><b>Kalbadevi, Mumbai</b><br>26/28 Nirnay Sagar, Press Room No. B/4-A, Ground Floor, Dr. M.B. Velkar Street, Kolbhat Lane, Kalbadevi, Mumbai, Maharashtra 400002</li><li><b>Dombivli West</b><br>15, Eshwar Kripa Bldg, Ghanshyam Gupte Road, Jai Hind Colony, Dombivli West, Maharashtra 421202</li><li><b>Bhiwandi (factory outlet)</b><br>C-14, Gala No. 104, Parashnath Complex, Dapoda Road, Bhiwandi, Thane, Maharashtra 421302</li></ul></div>
   </div>
   <p class="copy">© 2026 Mukund Enterprises. All rights reserved. GSTIN 27AGCPJ9001C1ZX</p>

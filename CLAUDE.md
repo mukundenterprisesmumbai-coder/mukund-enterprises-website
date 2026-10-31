@@ -24,3 +24,9 @@ Owner is non-technical: explain changes in plain language and show a preview aft
 ## Speed
 - Poppins is self-hosted in `assets/fonts/` (latin + latin-ext, weights 400-700); every page preloads the 4 latin files. Don't add Google Fonts links back.
 - On `products.html` only the first card photo loads eagerly (`fetchpriority="high"`); the rest stay `loading="lazy"`.
+
+## Lead pages and extras (31 Oct 2026)
+- `bulk-government-orders.html` and `monsoon-umbrella-booking.html`: lead pages linked from every footer ("For businesses") and the sitemap. Built by a one-off script; edit the HTML directly.
+- The floating WhatsApp button (`a.wa`) is pre-filled by `script.js` with the page's H1 and URL (home page keeps the generic text).
+- Catalogue PDF is linked from Home, Products, Promotional umbrellas and the two lead pages; clicks are tracked as `catalogue_download`. Keep it near 3 MB (images recompressed with PyMuPDF `rewrite_images`, quality 62, 144 dpi).
+- Home page has a "What our buyers say" block with 4 Google reviews (same texts as the review pop-up).
