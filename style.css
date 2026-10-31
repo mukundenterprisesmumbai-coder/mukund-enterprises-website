@@ -297,3 +297,7 @@ nav a.active::after { background: var(--saffron); }
 .quote-card blockquote { margin: 0; font-size: .9rem; color: #444; line-height: 1.65; flex: 1; }
 .quote-card figcaption { font-size: .8rem; font-weight: 600; color: var(--navy); }
 .reviews .btns { margin-top: 26px; }
+.review-row { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3 * 22px) / 4); gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+.review-row .quote-card { scroll-snap-align: start; }
+@media (max-width: 1000px) { .review-row { grid-auto-columns: calc((100% - 22px) / 2); } }
+@media (max-width: 600px) { .review-row { grid-auto-columns: 82%; } }

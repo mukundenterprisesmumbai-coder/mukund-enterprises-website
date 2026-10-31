@@ -223,3 +223,10 @@ const REVIEW_LINKS = {
   const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); run(e.target); } }), { threshold: 0.6 });
   els.forEach(el => io.observe(el));
 })();
+
+// home page: review quotes row - arrows scroll one card at a time
+const rrow = document.querySelector('.review-row');
+if (rrow) document.querySelectorAll('.review-nav button').forEach(b => b.addEventListener('click', () => {
+  const w = rrow.firstElementChild.getBoundingClientRect().width + 22;
+  rrow.scrollBy({ left: (b.classList.contains('next') ? 1 : -1) * w, behavior: 'smooth' });
+}));
