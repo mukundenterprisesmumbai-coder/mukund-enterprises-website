@@ -26,6 +26,13 @@ document.addEventListener('click', ev => {
   else if (/contact\.html\?/.test(a.getAttribute('href') || '')) track('quote_click', { label: decodeURIComponent((a.getAttribute('href').split('product=')[1] || '')).slice(0, 90) });
 }, true);
 
+// floating call button, stacked above the WhatsApp button (same number)
+if (document.querySelector('a.wa') && !document.querySelector('a.call-float')) {
+  const c = document.createElement('a');
+  c.className = 'call-float'; c.href = 'tel:+' + SITE.whatsapp; c.setAttribute('aria-label', 'Call ' + SITE.phone);
+  c.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>';
+  document.querySelector('a.wa').before(c);
+}
 // floating WhatsApp button: mention the page the visitor is on, so the first reply can be specific
 const waFloat = document.querySelector('a.wa[data-wa]');
 const pageH1 = document.querySelector('h1');
@@ -230,3 +237,24 @@ if (rrow) document.querySelectorAll('.review-nav button').forEach(b => b.addEven
   const w = rrow.firstElementChild.getBoundingClientRect().width + 22;
   rrow.scrollBy({ left: (b.classList.contains('next') ? 1 : -1) * w, behavior: 'smooth' });
 }));
+
+// products page: search as you type (works together with the category buttons)
+const ps = document.getElementById('psearch');
+if (ps) {
+  const none = document.getElementById('psearch-none');
+  fbtns.forEach(b => b.addEventListener('click', () => { ps.value = ''; none.hidden = true; }));
+  const norm = t => t.toLowerCase().replace(/["”']/g, '').replace(/-/g, ' ');
+  let tmr;
+  ps.addEventListener('input', () => {
+    const words = norm(ps.value).split(/\s+/).filter(Boolean);
+    if (words.length) fbtns.forEach(x => x.classList.toggle('on', x.dataset.f === 'all'));
+    let shown = 0;
+    document.querySelectorAll('.product').forEach(p => {
+      const hay = norm(p.textContent + ' ' + p.dataset.cat);
+      const ok = words.every(w => hay.includes(w));
+      p.style.display = ok ? '' : 'none'; if (ok) shown++;
+    });
+    none.hidden = shown > 0;
+    clearTimeout(tmr); if (words.length) tmr = setTimeout(() => track('product_search', { label: ps.value.slice(0, 60), results: shown }), 1200);
+  });
+}
