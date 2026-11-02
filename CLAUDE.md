@@ -18,3 +18,18 @@ Owner is non-technical: explain changes in plain language and show a preview aft
 - Each product card in `products.html` loads `assets/products/<name>.jpg`; the expected names are listed in `assets/products/README-file-names.txt`.
 - Names must match exactly: lowercase, hyphens, `.jpg`.
 - Before adding a photo, check its real format (owner's photos are sometimes PNGs renamed to .jpg). Convert to a real JPEG, max 800×800, quality ~82, progressive — target under ~150 KB.
+- After adding or replacing any photo in `assets/products`, `assets/branding`, `assets/factory` or `assets/hero`, run `python3 tools/make-avif.py` (needs Pillow with AVIF). It makes the smaller AVIF copies at the same pixel size. Pages show them through `<picture><source type="image/avif" ...>` around the `<img>`, with the JPG as fallback; new `<img>` tags for these photos should get the same wrapper.
+- Browser caching is set in `_headers`: photos are cached for 30 days, so give a replaced photo a new file name.
+
+## Speed
+- Poppins is self-hosted in `assets/fonts/` (latin + latin-ext, weights 400-700); every page preloads the 4 latin files. Don't add Google Fonts links back.
+- On `products.html` only the first card photo loads eagerly (`fetchpriority="high"`); the rest stay `loading="lazy"`.
+
+## Lead pages and extras (31 Oct 2026)
+- `bulk-government-orders.html` and `monsoon-umbrella-booking.html`: lead pages linked from every footer ("For businesses") and the sitemap. Built by a one-off script; edit the HTML directly.
+- The floating WhatsApp button (`a.wa`) is pre-filled by `script.js` with the page's H1 and URL (home page keeps the generic text).
+- Catalogue PDF is linked from Home, Products, Promotional umbrellas and the two lead pages; clicks are tracked as `catalogue_download`. Keep it near 3 MB (images recompressed with PyMuPDF `rewrite_images`, quality 62, 144 dpi).
+- Home page has a "What our buyers say" block with 4 Google reviews (same texts as the review pop-up).
+- Product structured data: each product page uses a single `Offer` with `price` = the "From" price, plus `sku` and `itemCondition` (Google's merchant listings reject `AggregateOffer`). Only `promotional-umbrellas.html` keeps an `AggregateOffer` (low/high of the cards on that page); update it when prices change.
+- `tools.js` (loaded on Home, Contact, Bulk orders and Logo preview): product finder quiz (`#finder`), price estimator (`#estimator`), logo-on-umbrella canvas (`logo-preview.html`). It reads product names, photos and "From" prices from `products.html` at runtime, so price changes need no edit here. GA events: finder_complete, logo_preview, product_search, catalogue_download.
+- `script.js` adds the floating call button (`a.call-float`, same number as WhatsApp) above the WhatsApp button on every page, and the Products search box.

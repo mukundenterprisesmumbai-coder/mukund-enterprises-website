@@ -1,4 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+/* Poppins, served from our own site (no extra trip to Google Fonts) */
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/poppins-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 400; font-display: swap; src: url('assets/fonts/poppins-400-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/poppins-500-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 500; font-display: swap; src: url('assets/fonts/poppins-500-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/poppins-600-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 600; font-display: swap; src: url('assets/fonts/poppins-600-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/poppins-700-latin-ext.woff2') format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: 'Poppins'; font-style: normal; font-weight: 700; font-display: swap; src: url('assets/fonts/poppins-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+/* stand-in while Poppins loads, sized to match it so the text doesn't jump when the real font arrives */
+@font-face { font-family: 'Poppins Fallback'; src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('Helvetica'); ascent-override: 92.83%; descent-override: 30.94%; line-gap-override: 8.84%; size-adjust: 113.15%; }
 
 :root {
   --black: #1B2A4A;
@@ -7,18 +17,19 @@
   --saffron-dark: #B8621B;
   --cream: #FFF8EE;
   --ink: #222;
-  --grey: #999;
+  --grey: #6B6B6B;
   --soft: #FCEFDC;
   --line: #EADFCD;
   --dline: rgba(255, 255, 255, .22);
   --accent: #B8621B;
-  --sans: 'Poppins', Arial, Helvetica, sans-serif;
+  --sans: 'Poppins', 'Poppins Fallback', Arial, Helvetica, sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body { font-family: var(--sans); background: var(--cream); color: var(--ink); line-height: 1.7; font-weight: 400; font-size: 15px; -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; display: block; }
+picture { display: contents; }   /* AVIF wrapper: the <img> inside keeps its usual layout */
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 .wrap { max-width: 1760px; margin: 0 auto; padding: 0 clamp(28px, 4vw, 64px); }
@@ -62,7 +73,12 @@ em { font-style: normal; color: var(--accent); }
 .hero-slides { position: absolute; inset: 0; z-index: 0; }
 .hero-slides .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease; }
 .hero-slides .slide.on { opacity: 1; }
-.hero-slides::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(27,42,74,.86) 0%, rgba(27,42,74,.66) 55%, rgba(27,42,74,.45) 100%); }
+.hero-slides .slide.first { background-image: url('assets/hero/terrace.jpg'); background-image: image-set(url('assets/hero/terrace.avif') type('image/avif'), url('assets/hero/terrace.webp') type('image/webp'), url('assets/hero/terrace.jpg') type('image/jpeg')); }
+.hero-slides::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(27,42,74,.78) 0%, rgba(27,42,74,0) 32%), linear-gradient(90deg, rgba(27,42,74,.80) 0%, rgba(27,42,74,.55) 40%, rgba(27,42,74,.12) 75%, rgba(27,42,74,0) 100%); }
+@media (max-width: 760px) {
+  .hero-slides .slide.first { background-image: url('assets/hero/terrace-phone.jpg'); background-image: image-set(url('assets/hero/terrace-phone.webp') type('image/webp'), url('assets/hero/terrace-phone.jpg') type('image/jpeg')); }
+  .hero-slides::after { background: linear-gradient(180deg, rgba(27,42,74,.55) 0%, rgba(27,42,74,.68) 55%, rgba(27,42,74,.7) 100%); }
+}
 .hero > .wrap { position: relative; z-index: 1; }
 .hero-slides ~ .wrap h1 em { text-shadow: 0 1px 6px rgba(0,0,0,.6); }
 .hero-slides ~ .wrap .eyebrow { display: inline-block; color: var(--accent); font-size: 1rem; font-weight: 700; letter-spacing: .22em; padding: 9px 14px; background: rgba(27,42,74,.82); border-left: 3px solid var(--saffron); }
@@ -88,7 +104,7 @@ em { font-style: normal; color: var(--accent); }
 /* Stats */
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 80px; }
 .stat { border-left: 2px solid #fff; padding-left: 18px; }
-.stat b { display: block; font-size: 2.1rem; font-weight: 600; line-height: 1.1; }
+.stat b { display: block; font-size: 2.1rem; font-weight: 600; line-height: 1.1; font-variant-numeric: tabular-nums; }
 .stat span { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: #bbb; }
 
 /* Sections */
@@ -273,3 +289,67 @@ nav a.active::after { background: var(--saffron); }
 .pd-img img.icon-big { width: 40%; height: auto; filter: brightness(.3); opacity: .7; }
 @media (max-width: 1100px) { .g5 { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 700px) { .g5 { grid-template-columns: 1fr 1fr; } }
+
+/* home page: Google review quotes */
+.quote-card { margin: 0; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; }
+.quote-card:hover { transform: none; box-shadow: none; border-color: var(--line); }
+.quote-card .stars { color: #B06D00; letter-spacing: 2px; font-size: .95rem; }
+.quote-card blockquote { margin: 0; font-size: .9rem; color: #444; line-height: 1.65; flex: 1; }
+.quote-card figcaption { font-size: .8rem; font-weight: 600; color: var(--navy); }
+.reviews .btns { margin-top: 26px; }
+.review-row { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 3 * 22px) / 4); gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+.review-row .quote-card { scroll-snap-align: start; }
+@media (max-width: 1000px) { .review-row { grid-auto-columns: calc((100% - 22px) / 2); } }
+@media (max-width: 600px) { .review-row { grid-auto-columns: 82%; } }
+
+/* floating call button (above WhatsApp) */
+.call-float { position: fixed; right: 26px; bottom: 90px; width: 48px; height: 48px; border-radius: 50%; background: var(--navy); display: grid; place-items: center; z-index: 30; box-shadow: 0 6px 18px rgba(0,0,0,.3); }
+.call-float svg { width: 22px; height: 22px; fill: #fff; }
+.call-float:hover { background: #2a3d66; }
+a.stat { color: inherit; }
+
+/* product finder quiz */
+.finder { background: #fff; border: 1px solid var(--line); padding: 28px; }
+.q-progress { height: 4px; background: var(--line); margin-bottom: 22px; }
+.q-progress b { display: block; height: 100%; width: 0; background: var(--saffron); transition: width .3s; }
+.q-title { font-weight: 600; color: var(--navy); margin-bottom: 14px; font-size: 1.05rem; }
+.q-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.q-opts button { text-align: left; background: var(--cream); border: 1px solid var(--line); padding: 14px 16px; font: inherit; font-size: .9rem; color: var(--ink); cursor: pointer; transition: .2s; }
+.q-opts button:hover, .q-opts button:focus-visible { border-color: var(--navy); background: #fff; }
+.q-cards { display: grid; gap: 10px; margin-bottom: 18px; }
+.q-card { display: flex; gap: 14px; align-items: center; border: 1px solid var(--line); padding: 8px; background: var(--cream); }
+.q-card img { width: 72px; height: 72px; object-fit: cover; }
+.q-card b { display: block; color: var(--navy); font-size: .92rem; }
+.q-card small { color: var(--accent); font-weight: 600; }
+.q-card:hover { border-color: var(--navy); }
+.q-restart { background: none; border: 0; font: inherit; font-size: .8rem; text-decoration: underline; cursor: pointer; color: var(--grey); }
+.finder .btns { align-items: center; }
+
+/* price estimator */
+.estimator { background: #fff; border: 1px solid var(--line); padding: 26px; margin-top: 26px; }
+.estimator h3 { margin-bottom: 16px; }
+.estimator select, .estimator input { width: 100%; }
+.e-total { font-size: 2rem; font-weight: 700; color: var(--navy); margin-top: 14px; line-height: 1.2; }
+.estimator .btns { align-items: center; margin-top: 14px; }
+
+/* products search */
+.psearch { margin-bottom: 18px; max-width: 520px; }
+.psearch input { width: 100%; padding: 12px 14px; border: 1px solid var(--navy); font: inherit; background: #fff; }
+
+/* contact page map */
+.map { aspect-ratio: 16 / 7; border: 1px solid var(--line); background: #eee; }
+.map iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* logo preview tool */
+.umb-tool { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: start; }
+.umb-stage canvas { width: 100%; height: auto; display: block; }
+.umb-controls { display: grid; gap: 22px; }
+.umb-controls input[type=file] { width: 100%; }
+.umb-cols { display: flex; gap: 10px; margin-bottom: 10px; }
+.umb-cols input { width: 56px; height: 40px; border: 1px solid var(--line); padding: 2px; background: #fff; cursor: pointer; }
+.umb-pairs { display: flex; flex-wrap: wrap; gap: 8px; }
+.umb-pairs button { background: #fff; border: 1px solid var(--line); padding: 7px 12px; font: inherit; font-size: .78rem; cursor: pointer; }
+.umb-pairs button:hover { border-color: var(--navy); }
+.umb-controls select { width: 100%; }
+@media (max-width: 900px) { .umb-tool { grid-template-columns: 1fr; } .map { aspect-ratio: 4 / 3; } }
+@media (max-width: 600px) { .q-opts { grid-template-columns: 1fr; } .finder, .estimator { padding: 20px; } }

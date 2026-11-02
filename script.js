@@ -26,6 +26,23 @@ document.addEventListener('click', ev => {
   else if (/contact\.html\?/.test(a.getAttribute('href') || '')) track('quote_click', { label: decodeURIComponent((a.getAttribute('href').split('product=')[1] || '')).slice(0, 90) });
 }, true);
 
+// floating call button, stacked above the WhatsApp button (same number)
+if (document.querySelector('a.wa') && !document.querySelector('a.call-float')) {
+  const c = document.createElement('a');
+  c.className = 'call-float'; c.href = 'tel:+' + SITE.whatsapp; c.setAttribute('aria-label', 'Call ' + SITE.phone);
+  c.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>';
+  document.querySelector('a.wa').before(c);
+}
+// floating WhatsApp button: mention the page the visitor is on, so the first reply can be specific
+const waFloat = document.querySelector('a.wa[data-wa]');
+const pageH1 = document.querySelector('h1');
+if (waFloat && pageH1 && !/^\/(index\.html)?$/.test(location.pathname)) {
+  const topic = pageH1.textContent.replace(/\s+/g, ' ').trim().slice(0, 80);
+  waFloat.dataset.wa = 'Hi, I have an enquiry about: ' + topic + '\n' + location.href.split(/[?#]/)[0];
+}
+// count catalogue downloads
+document.addEventListener('click', ev => { const a = ev.target.closest('a[href$="catalogue.pdf"]'); if (a) track('catalogue_download', { label: location.pathname }); }, true);
+
 document.querySelectorAll('[data-phone]').forEach(e => { e.textContent = SITE.phone; if (e.tagName === 'A') e.href = 'tel:' + SITE.phone.replace(/\s/g, ''); });
 document.querySelectorAll('[data-wa]').forEach(e => {
   const msg = e.dataset.wa ? '?text=' + encodeURIComponent(e.dataset.wa) : '';
@@ -86,9 +103,15 @@ const ready = new Set([0]);
 // load the later photos after the page is ready, and only show a photo once it has fully loaded
 window.addEventListener('load', () => slides.forEach((s, i) => {
   if (!s.dataset.bg) return;
+  // phones get a tall crop so the photo isn't blown up
+  const src = (window.matchMedia('(max-width: 760px)').matches && s.dataset.bgPhone) || s.dataset.bg;
+  // try the smallest copy first (AVIF), then WebP, then the JPG
+  const tries = [src.replace(/\.jpg$/, '.avif'), src.replace(/\.jpg$/, '.webp'), src];
+  if ('noAvif' in s.dataset) tries.shift();   // no AVIF copy (it wasn't smaller than the WebP)
   const img = new Image();
-  img.onload = () => { s.style.backgroundImage = "url('" + s.dataset.bg + "')"; ready.add(i); };
-  img.src = s.dataset.bg;
+  img.onload = () => { s.style.backgroundImage = "url('" + img.src + "')"; ready.add(i); };
+  img.onerror = () => { tries.shift(); if (tries.length) img.src = tries[0]; };
+  img.src = tries[0];
 }));
 if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   let cur = 0;
@@ -187,3 +210,51 @@ const REVIEW_LINKS = {
   box.addEventListener('mouseleave', () => { if (!stopped) timer = setTimeout(() => { box.classList.remove('show'); timer = setTimeout(show, 3000); }, 3000); });
   setTimeout(show, 4000);
 })();
+
+// stats count up from 0 when they scroll into view (e.g. "50K+" runs 0 → 50, keeping "K+")
+(() => {
+  const els = [...document.querySelectorAll('.stat b')];
+  if (!els.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const run = el => {
+    const m = el.textContent.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/); if (!m) return;
+    const [, pre, num, post] = m, end = parseFloat(num), dec = (num.split('.')[1] || '').length, t0 = performance.now(), dur = 2200;
+    const step = now => {
+      const p = Math.min((now - t0) / dur, 1), v = end * (1 - Math.pow(1 - p, 2));
+      el.textContent = pre + (p < 1 ? v.toFixed(dec) : num) + post;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    el.textContent = pre + (0).toFixed(dec) + post;
+    requestAnimationFrame(step);
+  };
+  const io = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { io.unobserve(e.target); run(e.target); } }), { threshold: 0.6 });
+  els.forEach(el => io.observe(el));
+})();
+
+// home page: review quotes row - arrows scroll one card at a time
+const rrow = document.querySelector('.review-row');
+if (rrow) document.querySelectorAll('.review-nav button').forEach(b => b.addEventListener('click', () => {
+  const w = rrow.firstElementChild.getBoundingClientRect().width + 22;
+  rrow.scrollBy({ left: (b.classList.contains('next') ? 1 : -1) * w, behavior: 'smooth' });
+}));
+
+// products page: search as you type (works together with the category buttons)
+const ps = document.getElementById('psearch');
+if (ps) {
+  const none = document.getElementById('psearch-none');
+  fbtns.forEach(b => b.addEventListener('click', () => { ps.value = ''; none.hidden = true; }));
+  const norm = t => t.toLowerCase().replace(/["”']/g, '').replace(/-/g, ' ');
+  let tmr;
+  ps.addEventListener('input', () => {
+    const words = norm(ps.value).split(/\s+/).filter(Boolean);
+    if (words.length) fbtns.forEach(x => x.classList.toggle('on', x.dataset.f === 'all'));
+    let shown = 0;
+    document.querySelectorAll('.product').forEach(p => {
+      const hay = norm(p.textContent + ' ' + p.dataset.cat);
+      const ok = words.every(w => hay.includes(w));
+      p.style.display = ok ? '' : 'none'; if (ok) shown++;
+    });
+    none.hidden = shown > 0;
+    clearTimeout(tmr); if (words.length) tmr = setTimeout(() => track('product_search', { label: ps.value.slice(0, 60), results: shown }), 1200);
+  });
+}

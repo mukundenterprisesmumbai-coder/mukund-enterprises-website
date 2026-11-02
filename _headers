@@ -1,0 +1,11 @@
+# Browser caching (Netlify reads this file). Photos and fonts rarely change, so returning visitors keep them
+# for 30 days; pages, CSS and JS are re-checked within an hour so updates show up soon after a deploy.
+# When replacing a photo, give the new file a new name so visitors don't keep seeing the old one.
+/assets/*
+  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
+/style.css
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/script.js
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+/mukund-enterprises-catalogue.pdf
+  Cache-Control: public, max-age=604800
