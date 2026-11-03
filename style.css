@@ -288,7 +288,7 @@ nav a.active::after { background: var(--saffron); }
 .steps .card h3 { font-size: 1.02rem; }
 .pd-img img.icon-big { width: 40%; height: auto; filter: brightness(.3); opacity: .7; }
 @media (max-width: 1100px) { .g5 { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 700px) { .g5 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 700px) { .g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .g5 .card { overflow-wrap: anywhere; } }
 
 /* home page: Google review quotes */
 .quote-card { margin: 0; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; }
