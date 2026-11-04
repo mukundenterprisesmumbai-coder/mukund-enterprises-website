@@ -267,7 +267,7 @@ def page(h):
 <section>
   <div class="wrap two">
     <div><p class="eyebrow">Price</p><h2>Starting prices for <em>{h['name']}</em></h2></div>
-    <div><table class="spec">{prices}</table><p style="margin-top:12px"><small>Starting prices incl. 5% GST, delivery extra depending on the order size. GST invoice with every order. {h['pickup']}</small></p></div>
+    <div><table class="spec">{prices}</table><p style="margin-top:12px"><small>Starting prices incl. GST (5% on umbrellas, 18% on canopies, gazebos, tables and stands), delivery extra depending on the order size. GST invoice with every order. {h['pickup']}</small></p></div>
   </div>
 </section>
 <section class="alt">
@@ -376,7 +376,7 @@ pillar = f"""<!doctype html>
 <section class="alt">
   <div class="wrap two">
     <div><p class="eyebrow">Price</p><h2>Starting <em>prices</em></h2></div>
-    <div><table class="spec">{"".join(f'<tr><th><a href="{u[3:]}">{n}</a></th><td>{p}</td></tr>' for n, p, u in PRICES)}</table><p style="margin-top:12px"><small>Starting prices incl. 5% GST, delivery extra.</small></p></div>
+    <div><table class="spec">{"".join(f'<tr><th><a href="{u[3:]}">{n}</a></th><td>{p}</td></tr>' for n, p, u in PRICES)}</table><p style="margin-top:12px"><small>Starting prices incl. GST (5% on umbrellas, 18% on canopies, gazebos, tables and stands), delivery extra.</small></p></div>
   </div>
 </section>
 <section>
