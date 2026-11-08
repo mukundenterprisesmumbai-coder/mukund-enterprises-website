@@ -361,3 +361,9 @@ a.stat { color: inherit; }
 .umb-controls select { width: 100%; }
 @media (max-width: 900px) { .umb-tool { grid-template-columns: 1fr; } .map { aspect-ratio: 4 / 3; } }
 @media (max-width: 600px) { .q-opts { grid-template-columns: 1fr; } .finder, .estimator { padding: 20px; } }
+
+/* Home hero: popular-search links (8 Nov 2026, from Search Console queries) */
+.need-links { list-style: none; padding: 0; margin: 22px 0 26px; display: flex; flex-wrap: wrap; gap: 8px; max-width: 760px; }
+.need-links a { display: inline-block; padding: 7px 12px; border: 1px solid rgba(255,255,255,.35); color: #fff; font-size: .8rem; background: rgba(0,0,0,.18); }
+.need-links a:hover { border-color: var(--saffron); color: var(--saffron); }
+.need-links b { color: var(--saffron); font-weight: 600; margin-left: 4px; }
