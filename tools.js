@@ -87,9 +87,28 @@
     const ctx = cv.getContext('2d'), form = document.getElementById('umb-controls');
     let logo = null;
     const N = 8;
+    const PALETTE = [['Navy blue','#1B2A4A'],['Royal blue','#1565C0'],['Sky blue','#4FC3F7'],['Teal','#00897B'],['Dark green','#2E7D32'],['Parrot green','#7CB342'],['Yellow','#FDD835'],['Golden','#D4A017'],['Saffron','#F2994A'],['Orange','#EF6C00'],['Red','#C62828'],['Maroon','#7B1E2B'],['Pink','#E91E63'],['Purple','#6A1B9A'],['Brown','#6D4C41'],['Beige','#E8D9B5'],['Grey','#9E9E9E'],['Silver','#C0C0C0'],['White','#FFFFFF'],['Black','#111111']];
+    const nameOf = hex => { const p = PALETTE.find(x => x[1].toLowerCase() === hex.toLowerCase()); return p ? p[0] : 'Custom ' + hex.toUpperCase(); };
+    const isLight = hex => { const n = parseInt(hex.slice(1), 16); return (0.299 * (n >> 16) + 0.587 * (n >> 8 & 255) + 0.114 * (n & 255)) > 160; };
+    form.querySelectorAll('.umb-sw').forEach(box => {
+      const custom = box.querySelector('.sw-custom');
+      PALETTE.forEach(([nm, hex]) => {
+        const b = document.createElement('button'); b.type = 'button'; b.style.background = hex; b.title = nm; b.setAttribute('aria-label', nm); b.dataset.hex = hex;
+        b.addEventListener('click', () => { form['col' + box.dataset.col].value = hex.toLowerCase(); draw(); });
+        box.insertBefore(b, custom);
+      });
+    });
+    form.querySelectorAll('.umb-pairs [data-pair]').forEach(b => { const [a, c] = b.dataset.pair.split(','); b.insertAdjacentHTML('afterbegin', `<span class="dots"><i style="background:${a}"></i><i style="background:${c}"></i></span>`); });
+    function mark() {
+      form.querySelectorAll('.umb-sw').forEach(box => {
+        const v = form['col' + box.dataset.col].value.toLowerCase(); let hit = false;
+        box.querySelectorAll('button').forEach(b => { const on = b.dataset.hex.toLowerCase() === v; hit = hit || on; b.setAttribute('aria-pressed', on); });
+        box.querySelector('.sw-custom').classList.toggle('on', !hit);
+      });
+    }
     function draw() {
       const W = cv.width, c = W / 2, R = W * 0.46, A = form.colA.value, B = form.colB.value, n = +form.panels.value;
-      ctx.clearRect(0, 0, W, W);
+      ctx.clearRect(0, 0, W, W); mark();
       const ang = i => (-90 - 180 / N + i * 360 / N) * Math.PI / 180;
       const pt = (a, r) => [c + Math.cos(a) * r, c + Math.sin(a) * r];
       // shadow
@@ -118,7 +137,7 @@
           const s = Math.min(bw / logo.width, bh / logo.height);
           ctx.drawImage(logo, -logo.width * s / 2, -logo.height * s / 2, logo.width * s, logo.height * s);
         } else {
-          ctx.fillStyle = form.colA.value === form.colB.value || i % 2 === 0 ? '#fff' : '#1B2A4A';
+          ctx.fillStyle = isLight(i % 2 ? B : A) ? '#1B2A4A' : '#fff';
           ctx.font = `700 ${Math.round(R * .085)}px Poppins, Arial, sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
           ctx.fillText('YOUR', 0, -R * .05); ctx.fillText('LOGO', 0, R * .05);
         }
@@ -140,7 +159,7 @@
       tr('logo_preview', { label: 'downloaded' });
     });
     document.getElementById('umb-wa').addEventListener('click', e => {
-      e.currentTarget.href = waLink(`Hi, I tried the logo preview on your website. I'd like a quote for logo umbrellas.\nCanopy colours: ${form.colA.value} / ${form.colB.value}\nLogo on ${form.panels.value} panel(s)\nQuantity: __\n(I'll send my logo and the preview image here.)`);
+      e.currentTarget.href = waLink(`Hi, I tried the logo preview on your website. I'd like a quote for logo umbrellas.\nUmbrella colours: ${form.colA.value.toLowerCase() === form.colB.value.toLowerCase() ? nameOf(form.colA.value) : nameOf(form.colA.value) + ' & ' + nameOf(form.colB.value)}\nLogo on ${form.panels.value} panel(s)\nQuantity: __\n(I'll send my logo and the preview image here.)`);
       tr('whatsapp_click', { label: 'logo preview' });
     });
     document.fonts && document.fonts.ready.then(draw); draw();

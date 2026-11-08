@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>See Your Logo on an Umbrella | Free Preview Tool</title>
-<meta name="description" content="Upload your logo and see it printed on an umbrella. Pick canopy colours and logo panels, download the preview and get a quote on WhatsApp.">
+<meta name="description" content="Upload your logo and see it printed on an umbrella. Pick umbrella colours and logo panels, download the preview and get a quote on WhatsApp.">
 <link rel="canonical" href="https://shadowumbrellas.in/logo-preview.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="See Your Logo on an Umbrella – Free Preview | Mukund Enterprises">
-<meta property="og:description" content="Upload your logo and see it printed on an umbrella. Pick canopy colours and logo panels, download the preview and get a quote on WhatsApp.">
+<meta property="og:description" content="Upload your logo and see it printed on an umbrella. Pick umbrella colours and logo panels, download the preview and get a quote on WhatsApp.">
 <meta property="og:image" content="https://shadowumbrellas.in/assets/products/promotional-umbrella.jpg">
 <meta property="og:url" content="https://shadowumbrellas.in/logo-preview.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -40,17 +40,21 @@
     <p class="crumbs"><a href="index.html">Home</a> / Logo preview</p>
     <p class="eyebrow">Free preview tool</p>
     <h1>See Your Logo on an <em>Umbrella</em></h1>
-    <p class="lead">Upload your logo, pick the canopy colours and choose how many panels to print. Your logo stays on your phone or computer; nothing is uploaded until you send it to us.</p>
+    <p class="lead">Upload your logo, pick the umbrella colours and choose how many panels to print. Your logo stays on your phone or computer; nothing is uploaded until you send it to us.</p>
   </div>
 </section>
 <section>
   <div class="wrap umb-tool">
-    <div class="umb-stage"><canvas id="umb" width="900" height="900" aria-label="Umbrella preview with your logo"></canvas><p class="note">Top view of an 8-panel umbrella. This is a quick preview; we send an exact PDF mock-up before printing.</p></div>
+    <div class="umb-stage"><canvas id="umb" width="900" height="900" aria-label="Umbrella preview with your logo"></canvas><p class="note">Top view of an 8-panel umbrella. This is a quick preview; we match the fabric shade to our stock and send an exact PDF mock-up before printing.</p></div>
     <form id="umb-controls" class="umb-controls" onsubmit="return false">
       <div><label for="umb-logo">1. Your logo (PNG with a clear background looks best)</label><input id="umb-logo" name="logo" type="file" accept="image/*"></div>
-      <div><label>2. Canopy colours</label>
-        <div class="umb-cols"><input type="color" name="colA" value="#1B2A4A" aria-label="Colour 1"><input type="color" name="colB" value="#F2994A" aria-label="Colour 2"></div>
-        <div class="umb-pairs"><button type="button" data-pair="#1B2A4A,#1B2A4A">Navy</button><button type="button" data-pair="#111111,#111111">Black</button><button type="button" data-pair="#C62828,#FFFFFF">Red &amp; white</button><button type="button" data-pair="#1565C0,#FFFFFF">Blue &amp; white</button><button type="button" data-pair="#2E7D32,#FDD835">Green &amp; yellow</button><button type="button" data-pair="#1B2A4A,#F2994A">Navy &amp; saffron</button></div></div>
+      <div><label>2. Select colours</label>
+        <p class="umb-sub">Colour 1</p>
+        <div class="umb-sw" data-col="A"><label class="sw-custom" title="Any other colour">+ Custom<input type="color" name="colA" value="#1B2A4A" aria-label="Custom colour 1"></label></div>
+        <p class="umb-sub">Colour 2 <span>(pick the same colour for a single-colour umbrella)</span></p>
+        <div class="umb-sw" data-col="B"><label class="sw-custom" title="Any other colour">+ Custom<input type="color" name="colB" value="#F2994A" aria-label="Custom colour 2"></label></div>
+        <p class="umb-sub">Popular combinations</p>
+        <div class="umb-pairs"><button type="button" data-pair="#1B2A4A,#1B2A4A">Navy</button><button type="button" data-pair="#111111,#111111">Black</button><button type="button" data-pair="#1B2A4A,#F2994A">Navy &amp; saffron</button><button type="button" data-pair="#C62828,#FFFFFF">Red &amp; white</button><button type="button" data-pair="#1565C0,#FFFFFF">Blue &amp; white</button><button type="button" data-pair="#111111,#FFFFFF">Black &amp; white</button><button type="button" data-pair="#2E7D32,#FDD835">Green &amp; yellow</button><button type="button" data-pair="#1565C0,#FDD835">Blue &amp; yellow</button><button type="button" data-pair="#7B1E2B,#D4A017">Maroon &amp; golden</button><button type="button" data-pair="#111111,#C62828">Black &amp; red</button><button type="button" data-pair="#6A1B9A,#E91E63">Purple &amp; pink</button><button type="button" data-pair="#00897B,#FFFFFF">Teal &amp; white</button></div></div>
       <div><label for="umb-panels">3. Logo printed on</label><select id="umb-panels" name="panels"><option value="1">1 panel</option><option value="2">2 panels</option><option value="4" selected>4 panels</option><option value="8">All 8 panels</option></select></div>
       <div class="btns"><a class="btn solid" id="umb-wa" href="#" target="_blank" rel="noopener">Get a quote on WhatsApp</a><button type="button" class="btn ghost" id="umb-download">Download preview</button></div>
       <p class="note">On WhatsApp, attach the downloaded preview and your logo file. Logo printing starts at 300 pieces. <a href="contact.html?topic=Custom%20branding&amp;product=Logo%20printed%20umbrella">Prefer the enquiry form?</a> You can attach your logo there.</p>
