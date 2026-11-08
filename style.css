@@ -345,10 +345,18 @@ a.stat { color: inherit; }
 .umb-stage canvas { width: 100%; height: auto; display: block; }
 .umb-controls { display: grid; gap: 22px; }
 .umb-controls input[type=file] { width: 100%; }
-.umb-cols { display: flex; gap: 10px; margin-bottom: 10px; }
-.umb-cols input { width: 56px; height: 40px; border: 1px solid var(--line); padding: 2px; background: #fff; cursor: pointer; }
+.umb-sub { font-size: .78rem; font-weight: 600; color: var(--navy); margin: 12px 0 8px; }
+.umb-sub span { font-weight: 400; color: var(--grey); }
+.umb-sw { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.umb-sw button { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(0,0,0,.18); padding: 0; cursor: pointer; }
+.umb-sw button[aria-pressed=true], .sw-custom.on { outline: 3px solid var(--navy); outline-offset: 2px; }
+.sw-custom { display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 4px 0 10px; border: 1px dashed var(--line); background: #fff; font-size: .74rem; cursor: pointer; text-transform: none; letter-spacing: 0; margin: 0; }
+.sw-custom input { width: 26px; height: 24px; border: 0; padding: 0; background: none; cursor: pointer; }
 .umb-pairs { display: flex; flex-wrap: wrap; gap: 8px; }
-.umb-pairs button { background: #fff; border: 1px solid var(--line); padding: 7px 12px; font: inherit; font-size: .78rem; cursor: pointer; }
+.umb-pairs button { background: #fff; border: 1px solid var(--line); padding: 7px 12px 7px 8px; font: inherit; font-size: .78rem; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; }
+.umb-pairs .dots { display: inline-flex; }
+.umb-pairs .dots i { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,.18); }
+.umb-pairs .dots i + i { margin-left: -5px; }
 .umb-pairs button:hover { border-color: var(--navy); }
 .umb-controls select { width: 100%; }
 @media (max-width: 900px) { .umb-tool { grid-template-columns: 1fr; } .map { aspect-ratio: 4 / 3; } }
