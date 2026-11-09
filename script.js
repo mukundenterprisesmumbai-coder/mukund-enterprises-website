@@ -40,6 +40,15 @@ if (waFloat && pageH1 && !/^\/(index\.html)?$/.test(location.pathname)) {
   const topic = pageH1.textContent.replace(/\s+/g, ' ').trim().slice(0, 80);
   waFloat.dataset.wa = 'Hi, I have an enquiry about: ' + topic + '\n' + location.href.split(/[?#]/)[0];
 }
+// product pages: show the "From" price right under the heading, so phone visitors see it before scrolling
+const priceCell = document.querySelector('.pd-info .spec td b');
+if (priceCell && pageH1 && /₹/.test(priceCell.textContent)) {
+  const pp = document.createElement('p');
+  pp.className = 'pd-price';
+  pp.innerHTML = '<b>' + priceCell.textContent + '</b> <span>incl. GST · bulk and logo orders quoted separately</span>';
+  pageH1.after(pp);
+}
+
 // count catalogue downloads
 document.addEventListener('click', ev => { const a = ev.target.closest('a[href$="catalogue.pdf"]'); if (a) track('catalogue_download', { label: location.pathname }); }, true);
 
@@ -77,7 +86,7 @@ if (form) {
     ok.style.display = err.style.display = 'none';
     btn.disabled = true; btn.firstChild.textContent = 'Sending…';
     // WhatsApp stays available as an optional, faster channel (visitor chooses to use it)
-    const text = `New enquiry\nName: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email')}\nTopic: ${f.get('topic')}\nProduct: ${f.get('product') || '-'}\nQuantity: ${f.get('qty') || '-'}\nCity: ${f.get('city') || '-'}\nNeeded by: ${f.get('needby') || '-'}${f.get('logo') && f.get('logo').size ? '\nLogo: attached to the enquiry form' : ''}\n\n${f.get('message')}`;
+    const text = `New enquiry\nName: ${f.get('name')}\nPhone: ${f.get('phone')}\nEmail: ${f.get('email') || '-'}\nTopic: ${f.get('topic')}\nProduct: ${f.get('product') || '-'}\nQuantity: ${f.get('qty') || '-'}\nCity: ${f.get('city') || '-'}\nNeeded by: ${f.get('needby') || '-'}${f.get('logo') && f.get('logo').size ? '\nLogo: attached to the enquiry form' : ''}\n\n${f.get('message')}`;
     form.querySelectorAll('.wa-link').forEach(a => a.href = 'https://wa.me/' + SITE.whatsapp + '?text=' + encodeURIComponent(text));
     try {
       // saved by Netlify Forms and emailed to the business

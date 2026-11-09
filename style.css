@@ -73,10 +73,10 @@ em { font-style: normal; color: var(--accent); }
 .hero-slides { position: absolute; inset: 0; z-index: 0; }
 .hero-slides .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1s ease; }
 .hero-slides .slide.on { opacity: 1; }
-.hero-slides .slide.first { background-image: url('assets/hero/terrace.jpg'); background-image: image-set(url('assets/hero/terrace.avif') type('image/avif'), url('assets/hero/terrace.webp') type('image/webp'), url('assets/hero/terrace.jpg') type('image/jpeg')); }
+.hero-slides .slide.first { background-image: url('assets/hero/terrace-v2.jpg'); background-image: image-set(url('assets/hero/terrace-v2.avif') type('image/avif'), url('assets/hero/terrace-v2.webp') type('image/webp'), url('assets/hero/terrace-v2.jpg') type('image/jpeg')); }
 .hero-slides::after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(27,42,74,.78) 0%, rgba(27,42,74,0) 32%), linear-gradient(90deg, rgba(27,42,74,.80) 0%, rgba(27,42,74,.55) 40%, rgba(27,42,74,.12) 75%, rgba(27,42,74,0) 100%); }
 @media (max-width: 760px) {
-  .hero-slides .slide.first { background-image: url('assets/hero/terrace-phone.jpg'); background-image: image-set(url('assets/hero/terrace-phone.webp') type('image/webp'), url('assets/hero/terrace-phone.jpg') type('image/jpeg')); }
+  .hero-slides .slide.first { background-image: url('assets/hero/terrace-phone-v2.jpg'); background-image: image-set(url('assets/hero/terrace-phone-v2.webp') type('image/webp'), url('assets/hero/terrace-phone-v2.jpg') type('image/jpeg')); }
   .hero-slides::after { background: linear-gradient(180deg, rgba(27,42,74,.55) 0%, rgba(27,42,74,.68) 55%, rgba(27,42,74,.7) 100%); }
 }
 .hero > .wrap { position: relative; z-index: 1; }
@@ -240,6 +240,10 @@ footer .logo { display: inline-block; margin-bottom: 16px; }
 .pd-info h1 { font-size: clamp(1.9rem, 3.4vw, 2.8rem); line-height: 1.15; }
 .pd-info .lead { color: #444; }
 .pd-info .btns { margin-top: 28px; }
+.pd-price { margin: 10px 0 0; font-size: 1.05rem; }
+.pd-price b { font-size: 1.35rem; color: var(--accent); }
+.pd-price span { display: block; color: var(--grey); font-size: .85rem; }
+.pd-info .btns + p { margin-top: 24px; }
 .spec { width: 100%; border-collapse: collapse; margin-top: 34px; font-size: .9rem; }
 .spec th, .spec td { text-align: left; padding: 12px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
 .spec th { width: 38%; font-weight: 500; color: var(--grey); padding-right: 16px; }
