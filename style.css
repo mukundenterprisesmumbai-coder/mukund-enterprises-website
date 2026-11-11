@@ -353,3 +353,8 @@ a.stat { color: inherit; }
 .umb-controls select { width: 100%; }
 @media (max-width: 900px) { .umb-tool { grid-template-columns: 1fr; } .map { aspect-ratio: 4 / 3; } }
 @media (max-width: 600px) { .q-opts { grid-template-columns: 1fr; } .finder, .estimator { padding: 20px; } }
+
+/* Home hero: the keyword line is the page's H1 (small top line); the big tagline keeps its look */
+.hero .tagline { font-weight: 700; line-height: 1.12; letter-spacing: -.01em; color: #fff; font-size: clamp(2.5rem, 6.2vw, 4.9rem); margin: 0; }
+.hero-slides ~ .wrap .tagline em { text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+.hero-slides ~ .wrap h1.eyebrow { font-size: .8rem; line-height: 1.6; letter-spacing: .14em; max-width: 46rem; margin: 0 0 18px; }
