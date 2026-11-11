@@ -60,7 +60,7 @@
     loadProducts().then(list => {
       sel.innerHTML = list.map((p, i) => `<option value="${i}">${p.name} (from ${inr(p.price)})</option>`).join('');
       const pre = new URLSearchParams(location.search).get('product');
-      const hit = pre && list.findIndex(p => p.name.toLowerCase() === pre.toLowerCase());
+      const hit = pre ? list.findIndex(p => p.name.toLowerCase() === pre.toLowerCase()) : -1;   // no product in the link: keep the first product selected
       if (hit >= 0) sel.value = hit;
       const update = () => {
         const p = list[sel.value], q = Math.max(1, parseInt(qty.value, 10) || 1);

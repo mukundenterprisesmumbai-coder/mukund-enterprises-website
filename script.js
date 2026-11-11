@@ -124,6 +124,40 @@ if (slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').
   }, 2000);
 }
 
+// page-header photo slideshow (Products, About, FAQ, Contact): a new photo every 3 seconds, dots to jump, pauses while the pointer is over it
+document.querySelectorAll('.hero-gallery').forEach(g => {
+  const gs = [...g.querySelectorAll('.gslide')];
+  if (gs.length < 2) return;
+  const dots = document.createElement('div'); dots.className = 'gdots';
+  let cur = 0, paused = false;
+  // fetch a photo a moment before it is shown, so the fade never lands on a blank frame
+  const preload = n => { const img = gs[n].querySelector('img'); if (img) img.loading = 'eager'; };
+  const show = n => {
+    preload(n);
+    gs[cur].classList.remove('on'); dots.children[cur].classList.remove('on');
+    cur = n;
+    gs[cur].classList.add('on'); dots.children[cur].classList.add('on');
+  };
+  gs.forEach((s, i) => {
+    const b = document.createElement('button'); b.type = 'button';
+    b.setAttribute('aria-label', 'Show photo ' + (i + 1) + ' of ' + gs.length);
+    if (i === 0) b.className = 'on';
+    b.addEventListener('click', () => show(i));
+    dots.appendChild(b);
+  });
+  g.appendChild(dots);
+  g.addEventListener('mouseenter', () => paused = true);
+  g.addEventListener('mouseleave', () => paused = false);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  window.addEventListener('load', () => preload(1));
+  setInterval(() => {
+    if (paused || document.hidden) return;
+    const next = (cur + 1) % gs.length, img = gs[next].querySelector('img');
+    if (img && !img.complete) { preload(next); return; }
+    show(next); preload((cur + 1) % gs.length);
+  }, 3000);
+});
+
 // home page: featured products carousel - loops forward forever (1 2 3 4 5 1 2 3 ...)
 const car = document.querySelector('.carousel');
 if (car) {
