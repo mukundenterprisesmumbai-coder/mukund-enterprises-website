@@ -30,6 +30,7 @@ for folder in ('products', 'branding', 'factory'):
 
 for webp in sorted(glob.glob('assets/hero/*.webp')):
     base = webp[:-5]
+    if os.path.exists(base + '.avif'): continue   # hero AVIFs were tuned by hand (~120-140 KB); delete one to remake it
     size = Image.open(webp).size
     im = Image.open(base + '.jpg').convert('RGB').resize(size, Image.LANCZOS)
     save_avif(im, base + '.avif', 62, webp)

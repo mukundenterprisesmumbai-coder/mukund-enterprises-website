@@ -33,3 +33,8 @@ Owner is non-technical: explain changes in plain language and show a preview aft
 - Product structured data: each product page uses a single `Offer` with `price` = the "From" price, plus `sku` and `itemCondition` (Google's merchant listings reject `AggregateOffer`). Only `promotional-umbrellas.html` keeps an `AggregateOffer` (low/high of the cards on that page); update it when prices change.
 - `tools.js` (loaded on Home, Contact, Bulk orders and Logo preview): product finder quiz (`#finder`), price estimator (`#estimator`), logo-on-umbrella canvas (`logo-preview.html`). It reads product names, photos and "From" prices from `products.html` at runtime, so price changes need no edit here. GA events: finder_complete, logo_preview, product_search, catalogue_download.
 - `script.js` adds the floating call button (`a.call-float`, same number as WhatsApp) above the WhatsApp button on every page, and the Products search box.
+
+## Political party pages (5 Nov 2026)
+- `political-party-umbrellas.html` (hub) and `parties/*.html` (12 parties) are built by `python3 tools/gen-party-pages.py`. Edit the `PARTIES` list there and re-run; don't edit the HTML by hand.
+- Party names and symbols appear in text only. Never add party logos or symbol artwork. Every page carries the "not affiliated with any party" line.
+- Linked from `industries/election-campaigns.html`, each `elections/*.html` page ("By party" block), `areas-we-serve.html` and `sitemap.xml`.
