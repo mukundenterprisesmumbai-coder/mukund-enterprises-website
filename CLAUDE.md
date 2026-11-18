@@ -38,3 +38,8 @@ Owner is non-technical: explain changes in plain language and show a preview aft
 - `political-party-umbrellas.html` (hub) and `parties/*.html` (12 parties) are built by `python3 tools/gen-party-pages.py`. Edit the `PARTIES` list there and re-run; don't edit the HTML by hand.
 - Party names and symbols appear in text only. Never add party logos or symbol artwork. Every page carries the "not affiliated with any party" line.
 - Linked from `industries/election-campaigns.html`, each `elections/*.html` page ("By party" block), `areas-we-serve.html` and `sitemap.xml`.
+
+## Chat bot (18 Nov 2026)
+- Guided quote chat bot at the end of `script.js` (`chatBot()`), styles at the end of `style.css`. No AI, no outside service.
+- Launcher `.chat-float` sits above the call button on every page that has `a.wa`. Flow: product → quantity → logo → city → name → opens WhatsApp with the enquiry filled in (or the contact form).
+- Answers in `BOT.faq` are copied from `faq.html`; update both together. GA events: chat_open, chat_quote_start, chat_question, chat_lead.

@@ -267,3 +267,164 @@ if (ps) {
     clearTimeout(tmr); if (words.length) tmr = setTimeout(() => track('product_search', { label: ps.value.slice(0, 60), results: shown }), 1200);
   });
 }
+
+// ---------- chat bot (18 Nov 2026) ----------
+// Guided quote assistant: quick-reply buttons, no AI and no outside service.
+// It collects product, quantity, logo, city and name, then opens WhatsApp with the enquiry filled in.
+// Answers come from faq.html - keep them in step when the FAQ changes.
+(function chatBot() {
+  if (!document.querySelector('a.wa') || document.querySelector('.chat-float')) return;
+  const BOT = {
+    hello: 'Hi! I can help you get a quote for umbrellas, tents and promotional tables, or answer quick questions. What would you like to do?',
+    products: [
+      ['Promotional umbrellas with logo', 'promotional-umbrellas.html'],
+      ['Garden / stall umbrellas with stand', 'promotional-garden-umbrellas.html'],
+      ['Gazebo tents', 'gazebo-tents.html'],
+      ['Canopy tents with logo', 'canopy-tent-printing.html'],
+      ['Corporate gift umbrellas', 'corporate-gift-umbrellas.html'],
+      ['Promotional tables', 'products/promotional-advertising-table.html'],
+      ['Plain umbrellas (wholesale)', 'products.html'],
+    ],
+    faq: {
+      moq: 'Minimum orders:\n• Logo-printed umbrellas: 300 pieces\n• Plain umbrellas: 144 pieces (12 dozen)\n• Printed garden umbrellas: 12 pieces\n• Canopy and gazebo tents: from 1 piece\nWe deal in bulk only for umbrellas, not single pieces.',
+      print: 'We print by screen printing (logos up to 3 colours) or digital printing (more than 3 colours, any brand colour from a hex code). An umbrella can carry up to 8 prints, one on each panel. Send your logo as CDR or PDF. We share a PDF mock-up and start printing only after you approve it.',
+      delivery: 'Printed canopies and umbrellas are delivered within 2 days of mock-up approval and advance payment in Mumbai, Thane, Navi Mumbai, Kalyan-Dombivli, Bhiwandi, Vasai-Virar, Panvel, Pune, Nashik and nearby areas, for standard sizes and regular quantities. We also dispatch to every state in India; delivery is charged by city and order size. Large bulk orders get a confirmed date in the quote.',
+      pay: 'Customised orders: 50% advance with the order and the balance before dispatch. We accept UPI, NEFT, RTGS, cheque and cash. Every order comes with a GST invoice.',
+      visit: 'Orders can be collected from our Dombivli West shop and our Bhiwandi factory outlet. Kalbadevi (Mumbai) is our booking office. Please book a meeting before you visit.',
+      sample: 'Samples are available for umbrella orders of 5,000 pieces or more (paid, printed with your logo). Message us to discuss your requirement.',
+    },
+  };
+  const root = '/';
+  const lead = {};
+  let mode = 'menu';
+
+  const btn = document.createElement('button');
+  btn.className = 'chat-float'; btn.type = 'button'; btn.setAttribute('aria-label', 'Chat with us'); btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9l-4.3 3.4A.5.5 0 0 1 4 20V5a1 1 0 0 1 1-1z"/></svg>';
+  const box = document.createElement('div');
+  box.className = 'chat-box'; box.hidden = true; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Chat with Shadow Umbrellas');
+  box.innerHTML = '<div class="cb-head"><b>Shadow Umbrellas</b><span>Quote assistant · replies on WhatsApp</span><button type="button" class="cb-x" aria-label="Close chat">×</button></div>'
+    + '<div class="cb-log" aria-live="polite"></div><div class="cb-chips"></div>'
+    + '<form class="cb-in"><input type="text" maxlength="120" placeholder="Type your question…" aria-label="Your message"><button type="submit" aria-label="Send">➤</button></form>';
+  document.querySelector('a.call-float, a.wa').before(btn);
+  document.body.appendChild(box);
+  const log = box.querySelector('.cb-log'), chips = box.querySelector('.cb-chips'), form = box.querySelector('.cb-in'), input = form.querySelector('input');
+
+  function say(text, who) {
+    const p = document.createElement('p'); p.className = who === 'me' ? 'me' : 'bot'; p.textContent = text;
+    log.appendChild(p); log.scrollTop = log.scrollHeight; return p;
+  }
+  function offer(list) {
+    chips.innerHTML = '';
+    list.forEach(([label, fn]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.onclick = () => { say(label, 'me'); fn(); }; chips.appendChild(b); });
+  }
+  function ask(placeholder, nextMode) { mode = nextMode; input.placeholder = placeholder; input.focus(); }
+  function menu(text) {
+    mode = 'menu'; input.placeholder = 'Type your question…';
+    if (text) say(text);
+    offer([['Get a price quote', startQuote], ['Products we make', showProducts], ['Minimum order', () => answer('moq')], ['Logo printing', () => answer('print')],
+      ['Delivery', () => answer('delivery')], ['Payment & GST', () => answer('pay')], ['Visit / collect', () => answer('visit')], ['Talk to a person', person]]);
+  }
+  function answer(key) { say(BOT.faq[key]); offer([['Get a price quote', startQuote], ['Ask something else', () => menu('Sure, what else would you like to know?')]]); track('chat_question', { label: key }); }
+  function showProducts() {
+    say('We manufacture these in our own Bhiwandi factory. Tap one to see photos and details, or get a quote:');
+    chips.innerHTML = '';
+    BOT.products.forEach(([name, url]) => { const a = document.createElement('a'); a.href = root + url; a.textContent = name; chips.appendChild(a); });
+    const q = document.createElement('button'); q.type = 'button'; q.textContent = 'Get a price quote'; q.onclick = () => { say('Get a price quote', 'me'); startQuote(); }; chips.appendChild(q);
+  }
+  function person() {
+    say('You can WhatsApp or call us on ' + SITE.phone + '. We usually reply within 15 minutes on WhatsApp.');
+    chips.innerHTML = '';
+    chips.appendChild(waLink('Open WhatsApp', 'Hi, I have an enquiry.\n' + location.href.split(/[?#]/)[0]));
+    const c = document.createElement('a'); c.href = 'tel:+' + SITE.whatsapp; c.textContent = 'Call now'; chips.appendChild(c);
+  }
+  function waLink(label, text) {
+    const a = document.createElement('a'); a.className = 'cb-wa'; a.textContent = label; a.target = '_blank'; a.rel = 'noopener';
+    a.href = 'https://wa.me/' + SITE.whatsapp + '?text=' + encodeURIComponent(text);
+    a.addEventListener('click', () => track('whatsapp_click', { label: 'chatbot' }));
+    return a;
+  }
+
+  // quote steps: product -> quantity -> logo -> city -> name -> WhatsApp
+  function startQuote() {
+    say('Great. Which product do you need?');
+    offer(BOT.products.map(([name]) => [name, () => { lead.product = name; stepQty(); }]).concat([['Something else', () => { say('Please type what you need.'); chips.innerHTML = ''; ask('e.g. 3-fold umbrella with logo', 'product'); }]]));
+    track('chat_quote_start');
+  }
+  function stepQty() {
+    say('How many pieces do you need? Tap a range or type a number.');
+    const tent = /tent|table/i.test(lead.product);
+    offer((tent ? ['1', '2 - 5', '6 - 20', '20+'] : ['12 - 100', '100 - 300', '300 - 1,000', '1,000 - 5,000', '5,000+']).map(q => [q, () => { lead.qty = q; stepLogo(); }]));
+    ask('Number of pieces', 'qty');
+  }
+  function stepLogo() {
+    if (/plain/i.test(lead.product)) { lead.logo = 'Plain, no printing'; return stepCity(); }
+    say('Do you want your logo printed?');
+    offer([['Yes, with my logo', () => { lead.logo = 'With logo printing'; moqNote(); stepCity(); }], ['No, plain', () => { lead.logo = 'Plain, no printing'; stepCity(); }]]);
+    mode = 'wait';
+  }
+  function moqNote() {
+    const n = parseInt(String(lead.qty).replace(/,/g, ''), 10);
+    if (/promotional umbrellas|corporate gift/i.test(lead.product) && n && n < 300 && !/\+/.test(lead.qty) && !/300 -|1,000|5,000/.test(lead.qty))
+      say('Note: logo-printed umbrellas start from 300 pieces. If you need fewer, printed garden umbrellas start from 12 pieces. Our team can suggest the best option.');
+  }
+  function stepCity() {
+    say('Which city should we deliver to?');
+    offer(['Mumbai', 'Thane', 'Navi Mumbai', 'Pune'].map(c => [c, () => { lead.city = c; stepName(); }]));
+    ask('Type your city', 'city');
+  }
+  function stepName() {
+    say('Last one: your name or company name? (optional)');
+    offer([['Skip', () => { lead.name = ''; finish(); }]]);
+    ask('Name / company', 'name');
+  }
+  function finish() {
+    const lines = ['Hi, I would like a quote:', 'Product: ' + lead.product, 'Quantity: ' + lead.qty, 'Printing: ' + lead.logo, 'Delivery city: ' + lead.city];
+    if (lead.name) lines.push('Name: ' + lead.name);
+    lines.push('(sent from the website chat: ' + location.href.split(/[?#]/)[0] + ')');
+    say('Thanks! Here is your enquiry:\n' + lines.slice(1, -1).join('\n') + '\n\nTap below to send it on WhatsApp. If you have a logo, attach it there (CDR or PDF preferred). We usually reply within 15 minutes.');
+    chips.innerHTML = '';
+    const wa = waLink('Send on WhatsApp', lines.join('\n')); wa.addEventListener('click', () => track('chat_lead', { label: lead.product })); chips.appendChild(wa);
+    const f = document.createElement('a'); f.href = root + 'contact.html?product=' + encodeURIComponent(lead.product + ', ' + lead.qty + ' pcs, ' + lead.logo + ', ' + lead.city); f.textContent = 'Use the enquiry form instead'; chips.appendChild(f);
+    const r = document.createElement('button'); r.type = 'button'; r.textContent = 'Start again'; r.onclick = () => { say('Start again', 'me'); menu(BOT.hello); }; chips.appendChild(r);
+    mode = 'done'; input.placeholder = 'Type your question…';
+  }
+
+  // typed messages: fill the current step, or match a question to an FAQ answer
+  const KEYS = [[/minimum|moq|min\b|how many|quantity|single|one piece|1 piece/i, 'moq'], [/logo|print|colour|color|mock|design|cdr|proof/i, 'print'],
+    [/deliver|dispatch|shipping|courier|days|how fast|time/i, 'delivery'], [/pay|gst|invoice|advance|upi|cash|bill/i, 'pay'],
+    [/visit|address|shop|office|factory|collect|location|where/i, 'visit'], [/sample/i, 'sample']];
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const t = input.value.trim(); if (!t) return;
+    input.value = ''; say(t, 'me');
+    if (mode === 'product') { lead.product = t; return stepQty(); }
+    if (mode === 'qty') { lead.qty = t; return stepLogo(); }
+    if (mode === 'city') { lead.city = t; return stepName(); }
+    if (mode === 'name') { lead.name = t; return finish(); }
+    if (/price|rate|cost|quote|kitna|kya rate|₹|rs\b/i.test(t)) { say('Prices depend on the product, quantity and printing. Let me take a few details for a quote.'); return startQuote(); }
+    const hit = KEYS.find(([re]) => re.test(t));
+    if (hit) return answer(hit[1]);
+    if (/tent|gazebo|canopy|garden|stall|table|umbrella|product/i.test(t)) return showProducts();
+    say('Good question. Our team can answer that directly on WhatsApp.');
+    chips.innerHTML = ''; chips.appendChild(waLink('Ask on WhatsApp', t + '\n' + location.href.split(/[?#]/)[0]));
+    const m = document.createElement('button'); m.type = 'button'; m.textContent = 'Back to menu'; m.onclick = () => menu('What would you like to do?'); chips.appendChild(m);
+    track('chat_question', { label: 'other: ' + t.slice(0, 60) });
+  });
+
+  function open() {
+    box.hidden = false; btn.setAttribute('aria-expanded', 'true'); btn.classList.add('on'); tip.remove();
+    if (!log.childElementCount) { menu(BOT.hello); track('chat_open', { label: location.pathname }); }
+    if (window.matchMedia('(min-width: 601px)').matches) input.focus();
+  }
+  function close() { box.hidden = true; btn.setAttribute('aria-expanded', 'false'); btn.classList.remove('on'); btn.focus(); }
+  btn.onclick = () => box.hidden ? open() : close();
+  box.querySelector('.cb-x').onclick = close;
+  box.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+  // one gentle "need a quote?" hint per visit, after 20 seconds
+  const tip = document.createElement('button'); tip.type = 'button'; tip.className = 'chat-tip'; tip.textContent = 'Need a quote? Chat with us';
+  tip.onclick = open;
+  let seen = false; try { seen = !!sessionStorage.getItem('chatTip'); } catch (e) {}
+  if (!seen) setTimeout(() => { if (box.hidden) { btn.after(tip); try { sessionStorage.setItem('chatTip', '1'); } catch (e) {} setTimeout(() => tip.remove(), 9000); } }, 20000);
+})();
