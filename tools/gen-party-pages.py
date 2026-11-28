@@ -158,7 +158,7 @@ def products_table(p):
 
 def party_page(d):
     p = "../"
-    url = f"{SITE}parties/{d['slug']}.html"
+    url = f"{SITE}parties/{d['slug']}"
     s = d["short"]
     sp = s if "Party" in s else s + " Party"
     sym_short = "party" if " or " in d["symbol"] else d["symbol"].split(" (")[0]
@@ -201,8 +201,8 @@ def party_page(d):
     colours_li = f"<li>Colours: {d['colours']}</li>" if d["colours"] else "<li>Colours: matched to the shades your party office gives us</li>"
     h, f = chrome(p)
     schemas = [
-        crumbs_schema([("Home", SITE), ("Election campaigns", SITE + "industries/election-campaigns.html"),
-                       ("Political party umbrellas", SITE + "political-party-umbrellas.html"), (f"{s} umbrellas", url)]),
+        crumbs_schema([("Home", SITE), ("Election campaigns", SITE + "industries/election-campaigns"),
+                       ("Political party umbrellas", SITE + "political-party-umbrellas"), (f"{s} umbrellas", url)]),
         faq_schema(faqs),
         {"@context": "https://schema.org", "@type": "Service", "name": f"{s} party umbrellas and canopy tents",
          "serviceType": "Printed political campaign umbrellas and canopy tents",
@@ -270,7 +270,7 @@ def party_page(d):
 
 def hub_page():
     p = ""
-    url = SITE + "political-party-umbrellas.html"
+    url = SITE + "political-party-umbrellas"
     title = "Political Party Umbrellas, Printed with Symbol"
     desc = "Party umbrellas, canopy tents and gazebos printed with party colours, symbol and candidate name for BJP, Congress, AAP, SP, Shiv Sena, DMK and more."
     faqs = [
@@ -285,10 +285,10 @@ def hub_page():
     els = "".join(f'<li><a href="elections/{k}.html">{v[0]}</a></li>' for k, v in ELECTIONS.items())
     h, f = chrome(p)
     schemas = [
-        crumbs_schema([("Home", SITE), ("Election campaigns", SITE + "industries/election-campaigns.html"), ("Political party umbrellas", url)]),
+        crumbs_schema([("Home", SITE), ("Election campaigns", SITE + "industries/election-campaigns"), ("Political party umbrellas", url)]),
         faq_schema(faqs),
         {"@context": "https://schema.org", "@type": "ItemList", "itemListElement": [
-            {"@type": "ListItem", "position": i + 1, "name": f"{d['short']} umbrellas", "url": f"{SITE}parties/{d['slug']}.html"} for i, d in enumerate(PARTIES)]},
+            {"@type": "ListItem", "position": i + 1, "name": f"{d['short']} umbrellas", "url": f"{SITE}parties/{d['slug']}"} for i, d in enumerate(PARTIES)]},
     ]
     return head(title, desc, url, p, schemas) + h + f"""
 

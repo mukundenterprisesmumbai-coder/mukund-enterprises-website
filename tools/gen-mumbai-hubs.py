@@ -204,13 +204,13 @@ def esc_json(s):
     return html.unescape(s)
 
 def page(h):
-    url = f"https://shadowumbrellas.in/locations/{h['slug']}.html"
+    url = f"https://shadowumbrellas.in/locations/{h['slug']}"
     nm = esc_json(h["name"])
     faqs = faq_list(h)
     ld = [
       {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://shadowumbrellas.in/"},
-        {"@type": "ListItem", "position": 2, "name": "Areas we serve", "item": "https://shadowumbrellas.in/areas-we-serve.html"},
+        {"@type": "ListItem", "position": 2, "name": "Areas we serve", "item": "https://shadowumbrellas.in/areas-we-serve"},
         {"@type": "ListItem", "position": 3, "name": nm, "item": url}]},
       {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
         {"@type": "Question", "name": esc_json(q), "acceptedAnswer": {"@type": "Answer", "text": esc_json(a)}} for q, a in faqs]},
@@ -320,7 +320,7 @@ pfaqh = "".join(f"<details><summary>{q}</summary><p>{a}</p></details>" for q, a 
 pld = [
  {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://shadowumbrellas.in/"},
-   {"@type": "ListItem", "position": 2, "name": "2-day printed delivery", "item": "https://shadowumbrellas.in/2-day-delivery.html"}]},
+   {"@type": "ListItem", "position": 2, "name": "2-day printed delivery", "item": "https://shadowumbrellas.in/2-day-delivery"}]},
  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in pfaq]},
  {"@context": "https://schema.org", "@type": "Service", "name": "2-day printed canopy, gazebo and umbrella delivery", "serviceType": "Promotional canopy tent, gazebo and umbrella printing",
   "provider": {"@type": "LocalBusiness", "name": "Mukund Enterprises", "url": "https://shadowumbrellas.in/", "telephone": "+919137878456"},
@@ -339,12 +339,12 @@ pillar = f"""<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{P_TITLE}</title>
 <meta name="description" content="{P_DESC}">
-<link rel="canonical" href="https://shadowumbrellas.in/2-day-delivery.html">
+<link rel="canonical" href="https://shadowumbrellas.in/2-day-delivery">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{P_TITLE}">
 <meta property="og:description" content="{P_DESC}">
 <meta property="og:image" content="https://shadowumbrellas.in/assets/products/pop-up-canopy-10x10.jpg">
-<meta property="og:url" content="https://shadowumbrellas.in/2-day-delivery.html">
+<meta property="og:url" content="https://shadowumbrellas.in/2-day-delivery">
 {root_head}{pldh}</head>
 {root_header}<section class="hero small lp-hero">
   <div class="wrap">
